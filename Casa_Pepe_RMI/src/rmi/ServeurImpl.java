@@ -30,13 +30,6 @@ public class ServeurImpl implements ServeurInterface{
 	public boolean identificationValid(String id,String mdp) throws RemoteException{
 		return base.identIsValid(id, mdp);
 	}
-<<<<<<< HEAD
-
-	public boolean recupereAllPlats() throws RemoteException{
-		return base.recupAllPlats();
-	}
-	
-=======
 	public Menu getMenu(String nom) throws RemoteException{
 		return base.getMenu(nom);
 	}
@@ -49,7 +42,7 @@ public class ServeurImpl implements ServeurInterface{
 	public Plat getPlat(int idPlat) throws RemoteException{
 		return base.getPlat(idPlat);
 	}
->>>>>>> a33590e76f84c3592291b8d32655c1eee9c2647f
+	
 	public static void main(String[] args){
 		int port = 20000;
 		ServeurImpl si = new ServeurImpl();

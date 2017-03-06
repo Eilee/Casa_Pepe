@@ -36,7 +36,7 @@ public class ServletAccueil extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		Manager manager = (Manager) request.getSession().getAttribute("Manager");
-		if(manager.recupereAllPlatsServ()){
+		/*if(manager.recupereAllPlatsServ()){
 			System.out.println("Accueil OK");
 			response.sendRedirect("Accueil.jsp");
 			//passage de la session dans la request
@@ -44,6 +44,6 @@ public class ServletAccueil extends HttpServlet {
 		}else{
 			System.out.println("Accueil KO");
 			doGet(request,response);
-		}
+		}*/
 	}
 }

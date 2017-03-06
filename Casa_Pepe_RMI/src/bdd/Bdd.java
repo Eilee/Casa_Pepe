@@ -68,11 +68,7 @@ public class Bdd {
 				res = true;
 			}
 		} catch (SQLException e) {
-<<<<<<< HEAD
-			System.out.println(e.getMessage());
-=======
 			System.out.println("Erreur Base.identIsValid "+e.getMessage());
->>>>>>> a33590e76f84c3592291b8d32655c1eee9c2647f
 			e.printStackTrace();
 		}
 		
@@ -86,7 +82,7 @@ public class Bdd {
 		String sql ="SELECT * FROM `t_plat`,`t_groupe` WHERE `id_groupe`=`fk_id_grp`";
 		PreparedStatement ps = null;
 		ResultSet rs = null;
-		Menu menu = new Menu();
+		//Menu menu = new Menu();
 		
 		try {
 			ps = connection.prepareStatement(sql);
@@ -102,7 +98,8 @@ public class Bdd {
 		
 		try {if (ps != null) ps.close();} catch (Exception e) {}
 		
-		return menu;
+		//return menu;
+		return false;
 	}
 
 	private boolean menuExist(String n){

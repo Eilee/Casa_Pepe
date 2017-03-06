@@ -36,7 +36,7 @@ public class ServletGestionGroupes extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		Manager manager = (Manager) request.getSession().getAttribute("Manager");
-		if(manager.recupereAllPlatsServ()){
+		/*if(manager.recupereAllPlatsServ()){
 			System.out.println("GestionGroupes OK");
 			response.sendRedirect("GestionGroupes.jsp");
 			//passage de la session dans la request
@@ -44,6 +44,6 @@ public class ServletGestionGroupes extends HttpServlet {
 		}else{
 			System.out.println("GestionGroupes KO");
 			doGet(request,response);
-		}
+		}*/
 	}
 }
