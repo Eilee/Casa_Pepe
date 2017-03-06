@@ -39,4 +39,14 @@ public class Manager {
 		}
 		return res;
 	}
+	
+	public boolean recupereAllPlatsServ(){
+		boolean res = false;
+		try{
+			res = serveur.recupereAllPlats();
+		}catch(Exception e){
+			System.out.println("Exception - Client isIdentificationValid(id,mdp");
+		}
+		return res;
+	}
 }

@@ -39,6 +39,11 @@ public class Client {
 			}else{
 				System.out.println("Identification KO !");
 			}
+			if(serveur.recupereAllPlats()){
+				System.out.println("Recup OK!");
+			}else{
+				System.out.println("Recup KO !");
+			}
 		}catch(Exception e){
 			
 		}

@@ -3,20 +3,22 @@ package servlet;
 import java.io.IOException;
 
 import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import bean.Plat;
-import validation.Validation;
+import manager.Manager;
 
-public class ServletPlat extends HttpServlet {
+@WebServlet("/Menus")
+public class ServletMenus extends HttpServlet {
 	private static final long serialVersionUID = 1L;
     
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public ServletPlat() {
+    public ServletMenus() {
 
     }
 
@@ -25,7 +27,7 @@ public class ServletPlat extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		//Simple chargement de la page , aucun traitement
-		System.out.println("doGet");
+		System.out.println("doGet Menus");
 		request.getServletContext().getRequestDispatcher("/WEB-INF/Menus.jsp").forward(request, response);
 	}
 
@@ -33,19 +35,15 @@ public class ServletPlat extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		Validation validation = new Validation();
-		validation.nonVide(Plat.class,"nom",request.getParameter("nom"));
-		validation.nonVide(Plat.class,"description",request.getParameter("description"));
-		if(validation.isValide()){
-			//si le resulat est valide , on redirige vers une autres vue
-			request.setAttribute("mess", "Le livre a été enregistré");
-			
-			request.getServletContext().getRequestDispatcher("/WEB-INF/Accueil.jsp").forward(request, response);
+		Manager manager = (Manager) request.getSession().getAttribute("Manager");
+		if(manager.recupereAllPlatsServ()){
+			System.out.println("Récup OK");
+			response.sendRedirect("Menus.jsp");
+			//passage de la session dans la request
+			//request.setAttribute(request.getSession(), arg1);
 		}else{
-			//Sinon on redirige sur la même page
-			request.setAttribute("validation", validation);
-			request.getServletContext().getRequestDispatcher("/WEB-INF/Menus.jsp").forward(request, response);
+			System.out.println("Menus KO");
+			doGet(request,response);
 		}
-		//doGet(request,response);
 	}
 }
