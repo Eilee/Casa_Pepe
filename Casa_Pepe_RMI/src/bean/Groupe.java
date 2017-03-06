@@ -7,7 +7,7 @@ import annotation.Table;
 public class Groupe {
 	@NonVide(mess="Veuillez saisir un nom pour votre groupe")
 	String nom;
-	
+	public Groupe(){}
 	public Groupe(String n){this.nom = n;}
 
 	public String getNom() {return nom;}
