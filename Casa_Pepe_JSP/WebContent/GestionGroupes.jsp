@@ -12,8 +12,45 @@
 	</div>
 </div>
 <div class="row">
-	<div class="col-md-12">
-		
+	<div class="col-md-12 tableGestion tableIcone">
+		<table>
+			<tr>
+				<td style="text-align:center"><b>Nom du groupe</b></td>
+			</tr>
+			<tr>
+				<td>
+					Entrée
+				</td>
+				<td>
+					<a href="Modification.jsp"><img src="img/modifier.png"/></a>
+				</td>
+				<td>
+					<a href=""><img src="img/supprimer.jpg" /></a>
+				</td>
+			</tr>
+			<tr>
+				<td>
+					Plats
+				</td>
+				<td>
+					<a href="Modification.jsp"><img src="img/modifier.png"/></a>
+				</td>
+				<td>
+					<a href=""><img src="img/supprimer.jpg" /></a>
+				</td>
+			</tr>
+			<tr>
+				<td>
+					Dessert
+				</td>
+				<td>
+					<a href="Modification.jsp"><img src="img/modifier.png"/></a>
+				</td>
+				<td>
+					<a href=""><img src="img/supprimer.jpg" /></a>
+				</td>
+			</tr>
+		</table>
 	</div>
 </div>
 <%@include file="Footer.jsp" %>

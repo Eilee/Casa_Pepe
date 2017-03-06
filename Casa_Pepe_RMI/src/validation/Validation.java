@@ -2,11 +2,8 @@ package validation;
 
 import java.lang.reflect.Field;
 import java.util.Hashtable;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 import annotation.NonVide;
-import annotation.Regexp;
 
 public class Validation {
 
