@@ -6,7 +6,6 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import annotation.NonVide;
-import annotation.Regexp;
 
 public class Validation {
 

@@ -12,10 +12,6 @@ public class ServeurImpl implements ServeurInterface{
 
 	Bdd base = new Bdd();
 	
-	public String meth(){
-		System.out.println("client  OK !");
-		return "serveur RMI OK !";
-	}
 	public boolean ouvrirBdd(){
 		if(base.ouvrir()){
 			System.out.println("Bdd ouverte - OK !");
@@ -27,6 +23,11 @@ public class ServeurImpl implements ServeurInterface{
 	}
 	public void fermerBdd(){
 		base.fermer();
+	}
+	
+	public boolean identificationValid(String id,String mdp) throws RemoteException{
+		
+		return base.identIsValid(id, mdp);
 	}
 	public static void main(String[] args){
 		int port = 20000;
@@ -59,5 +60,6 @@ public class ServeurImpl implements ServeurInterface{
 		System.out.println("Serveur RMI lancé !");
 		
 		
+
 	}
 }

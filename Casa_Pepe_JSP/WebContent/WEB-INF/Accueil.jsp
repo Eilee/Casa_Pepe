@@ -1,3 +1,4 @@
+<jsp:useBean id="Manager" class="manager.Manager" scope="session"/>
 <%@include file="Header.jsp" %>
 <div class="row">
 	<div class="col-md-12">
