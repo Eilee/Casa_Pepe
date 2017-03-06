@@ -1,15 +1,16 @@
 package bdd;
 
-import java.lang.reflect.Field;
-import java.lang.reflect.Method;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.Date;
+import java.util.HashMap;
 import java.util.ResourceBundle;
+
+import bean.Menu;
+import bean.Plat;
 
 public class Bdd {
 	String ficData = "data";
@@ -61,20 +62,138 @@ public class Bdd {
 			ps = connection.prepareStatement(sql);
 			ps.setString(1,id);
 			ps.setString(2, mdp);
-			System.out.println("sql = "+ps.toString());
 			rs = ps.executeQuery();
 			if(rs.next()){
 				System.out.println(rs.getString("ident_admin"));
 				res = true;
 			}
 		} catch (SQLException e) {
-			System.out.println("Erreur Base.enregistrerLivre "+e.getMessage());
+			System.out.println("Erreur Base.identIsValid "+e.getMessage());
 			e.printStackTrace();
 		}
 		
 		try {if (ps != null) ps.close();} catch (Exception e) {}
+		try {if (rs != null) rs.close();} catch (Exception e) {}
+		
 		return res;
 	}
 
+	private boolean menuExist(String n){
+		boolean res = false;
+		String sql ="SELECT nom_menu FROM `t_menu` WHERE `nom_menu` = ?";
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		try {
+			ps = connection.prepareStatement(sql);
+			ps.setString(1,n);
+			rs = ps.executeQuery();
+			if(rs.next()){
+				System.out.println(rs.getString("nom_menu") +" exist !");
+				res = true;
+			}
+		} catch (SQLException e) {
+			System.out.println("Erreur Base.menuExist "+e.getMessage());
+			e.printStackTrace();
+		}
+		try {if (ps != null) ps.close();} catch (Exception e) {}
+		try {if (rs != null) rs.close();} catch (Exception e) {}
+		return res;
+	}
 	
+	public Menu getMenu(String nom){
+		Menu res = null;
+		if(menuExist(nom)){
+			String sql ="SELECT * FROM `t_menu` WHERE `nom_menu` = ?";
+			PreparedStatement ps = null;
+			ResultSet rs = null;
+			
+			try {
+				ps = connection.prepareStatement(sql);
+				ps.setString(1,nom);
+				rs = ps.executeQuery();
+				//Si le menu existe en BDD on crée un menu avec ce nom
+				if(rs.next()){
+					System.out.println(rs.getString("nom_menu"));
+					res = new Menu(rs.getString("nom_menu"));
+					
+					//Puis on va charger la liste des plat qu'il contient
+					ArrayList<Plat> list = this.getMenuPlat(rs.getInt("id_menu"));
+					res.setListPlat(list);
+				}
+			} catch (SQLException e) {
+				System.out.println("Erreur Base.getMenu "+e.getMessage());
+				e.printStackTrace();
+			}
+		}
+		
+		return res;
+	}
+	
+	public ArrayList<Plat> getMenuPlat(int numMenu){
+		ArrayList<Plat> list = new ArrayList<Plat>();
+		String sqlContient = "SELECT id_plat FROM `t_contient` WHERE `id_menu` = ?";
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		try {
+			ps = connection.prepareStatement(sqlContient);
+			ps.setInt(1,numMenu);
+			rs = ps.executeQuery();
+			//Si le menu existe en BDD on crée un menu avec ce nom
+			if(rs.next()){
+				int id = rs.getInt("id_plat");
+				list.add(this.getPlat(id));
+			}
+		} catch (SQLException e) {
+			System.out.println("Erreur Base.getMenu "+e.getMessage());
+			e.printStackTrace();
+		}
+		return list;
+	}
+	
+	public ArrayList<Plat> getAllPlat(){
+		ArrayList<Plat> list = new ArrayList<Plat>();
+		String sqlContient = "SELECT * FROM `t_plat`";
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		try {
+			ps = connection.prepareStatement(sqlContient);
+			rs = ps.executeQuery();
+			//Si le menu existe en BDD on crée un menu avec ce nom
+			if(rs.next()){
+				int id = rs.getInt("id_plat");
+				list.add(this.getPlat(id));
+			}
+		} catch (SQLException e) {
+			System.out.println("Erreur Base.getMenu "+e.getMessage());
+			e.printStackTrace();
+		}
+		return list;
+	}
+	public Plat getPlat(int idPlat){
+		Plat res = null;
+		String sql ="SELECT * FROM `t_plat` WHERE `id_plat` = ?";
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		try {
+			ps = connection.prepareStatement(sql);
+			ps.setInt(1,idPlat);
+			rs = ps.executeQuery();
+			//Si le menu existe en BDD on crée un menu avec ce nom
+			if(rs.next()){
+				res = new Plat();
+				res.setNom(rs.getString("nom_plat"));
+				res.setDescription(rs.getString("desc_plat"));
+				res.setGroupe(rs.getInt("fk_id_grp"));
+				res.setPrix(rs.getFloat("prix_plat"));
+				//AJOUT DE L'IMAGE !!!!
+				
+				System.out.println(res.toString());
+				return res;
+			}
+		} catch (SQLException e) {
+			System.out.println("Erreur Base.getMenu "+e.getMessage());
+			e.printStackTrace();
+		}
+		return res;
+	}
 }

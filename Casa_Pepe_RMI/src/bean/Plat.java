@@ -1,18 +1,20 @@
 package bean;
 
+import java.io.Serializable;
+
 import annotation.Table;
 
 @Table(name="t_plat")
-public class Plat {
+public class Plat implements Serializable{
 
 	String nom;
 	String description;
 	float prix;
 	Byte[] img = new Byte[512];
-	Groupe groupe;
+	int groupe;
 	
 	public Plat(){};
-	public Plat(String n,String desc,float p,Groupe g,Byte[] im){
+	public Plat(String n,String desc,float p,int g,Byte[] im){
 		this.nom = n;
 		this.description = desc;
 		this.groupe =g;
@@ -44,11 +46,15 @@ public class Plat {
 	public void setImg(Byte[] img) {
 		this.img = img;
 	}
-	public Groupe getGroupe() {
+	public int getGroupe() {
 		return groupe;
 	}
-	public void setGroupe(Groupe groupe) {
+	public void setGroupe(int groupe) {
 		this.groupe = groupe;
+	}
+	@Override
+	public String toString() {
+		return "Plat [nom=" + nom + ", description=" + description + ", prix=" + prix + ", groupe=" + groupe + "]";
 	}
 	
 }
