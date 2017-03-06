@@ -124,8 +124,10 @@ public class Bdd {
 				System.out.println("Erreur Base.getMenu "+e.getMessage());
 				e.printStackTrace();
 			}
+			try {if (ps != null) ps.close();} catch (Exception e) {}
+			try {if (rs != null) rs.close();} catch (Exception e) {}
 		}
-		
+
 		return res;
 	}
 	
@@ -147,6 +149,8 @@ public class Bdd {
 			System.out.println("Erreur Base.getMenu "+e.getMessage());
 			e.printStackTrace();
 		}
+		try {if (ps != null) ps.close();} catch (Exception e) {}
+		try {if (rs != null) rs.close();} catch (Exception e) {}
 		return list;
 	}
 	
@@ -167,6 +171,8 @@ public class Bdd {
 			System.out.println("Erreur Base.getMenu "+e.getMessage());
 			e.printStackTrace();
 		}
+		try {if (ps != null) ps.close();} catch (Exception e) {}
+		try {if (rs != null) rs.close();} catch (Exception e) {}
 		return list;
 	}
 	public Plat getPlat(int idPlat){
@@ -194,6 +200,8 @@ public class Bdd {
 			System.out.println("Erreur Base.getMenu "+e.getMessage());
 			e.printStackTrace();
 		}
+		try {if (ps != null) ps.close();} catch (Exception e) {}
+		try {if (rs != null) rs.close();} catch (Exception e) {}
 		return res;
 	}
 }
