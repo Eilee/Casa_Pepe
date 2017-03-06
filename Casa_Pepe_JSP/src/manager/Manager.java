@@ -4,17 +4,16 @@ import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 
-import bean.Identification;
 import rmi.ServeurInterface;
 
 public class Manager {
-	boolean identifie = false;
-	String ident = "";
-	Identification identification = new Identification();
+
+	Registry registry;
+	ServeurInterface serveur;
 	public Manager(){
 		int port = 20000;
-		Registry registry = null;
-		ServeurInterface serveur = null;
+		registry = null;
+		serveur = null;
 		try {
 			registry = LocateRegistry.getRegistry(port);
 		} catch (RemoteException e) {
@@ -31,22 +30,13 @@ public class Manager {
 		}
 	}
 	
-	public boolean isIdentifie() {
-		return identifie;
-	}
-	public void setIdentifie(boolean identifie) {
-		this.identifie = identifie;
-	}
-	public String getIdent() {
-		return ident;
-	}
-	public void setIdent(String ident) {
-		this.ident = ident;
-	}
-	public Identification getIdentification() {
-		return identification;
-	}
-	public void setIdentification(Identification identification) {
-		this.identification = identification;
+	public boolean isIdentificationValid(String id,String mdp){
+		boolean res = false;
+		try{
+			res = serveur.identificationValid(id, mdp);
+		}catch(Exception e){
+			System.out.println("Exception - Client isIdentificationValid(id,mdp");
+		}
+		return res;
 	}
 }

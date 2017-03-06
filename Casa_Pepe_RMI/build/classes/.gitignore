@@ -1,9 +1,4 @@
-/annotation/
-/bdd/
-/bean/
-/data.properties
-/rmi/
-<<<<<<< HEAD
 /validation/
-=======
->>>>>>> a4f03d85ffccbbf661949b0ea3a627dbe19d5f41
+/bdd/
+/rmi/
+/bean/

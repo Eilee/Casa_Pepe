@@ -51,5 +51,29 @@ public class Bdd {
 		}
 
 	}
+	
+	public boolean identIsValid(String id,String mdp){
+		boolean res = false;
+		String sql ="SELECT ident_admin FROM `t_administrateur` WHERE `ident_admin` = ? AND`mdp_admin` = ?";
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		try {
+			ps = connection.prepareStatement(sql);
+			ps.setString(1,id);
+			ps.setString(2, mdp);
+			System.out.println("sql = "+ps.toString());
+			rs = ps.executeQuery();
+			if(rs.next()){
+				System.out.println(rs.getString("ident_admin"));
+				res = true;
+			}
+		} catch (SQLException e) {
+			System.out.println("Erreur Base.enregistrerLivre "+e.getMessage());
+			e.printStackTrace();
+		}
+		
+		try {if (ps != null) ps.close();} catch (Exception e) {}
+		return res;
+	}
 
 }

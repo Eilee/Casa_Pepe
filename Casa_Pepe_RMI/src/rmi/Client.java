@@ -26,5 +26,21 @@ public class Client {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		
+		try{
+			if(serveur.identificationValid("admin", "admin")){
+				System.out.println("Identification OK!");
+			}else{
+				System.out.println("Identification KO !");
+			}
+			
+			if(serveur.identificationValid("admin", "nua")){
+				System.out.println("Identification OK!");
+			}else{
+				System.out.println("Identification KO !");
+			}
+		}catch(Exception e){
+			
+		}
 	}
 }
