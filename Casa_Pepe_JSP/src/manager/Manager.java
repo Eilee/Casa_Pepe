@@ -5,7 +5,6 @@ import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 
 import bean.Identification;
-import rmi.Serveur;
 import rmi.ServeurInterface;
 
 public class Manager {

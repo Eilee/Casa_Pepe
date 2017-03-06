@@ -29,8 +29,9 @@
 			    color: white;
 			    background-color: #00b300;
 			}
-			body {position: relative;}
-			footer {position: absolute; bottom: 0;}
+			td{
+				width: 50%;
+			}
 		</style>
 		<script type="text/javascript" src="bootstrap/js/bootstrap.min.js"></script>
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">

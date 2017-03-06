@@ -16,5 +16,6 @@
 	<classpathentry kind="lib" path="F:/mysql-connector-java-5.1.32-bin.jar"/>
 	<classpathentry kind="lib" path="C:/Users/odicfabi/Documents/javax.servlet.jsp.jstl-api-1.2.1.jar"/>
 	<classpathentry kind="lib" path="C:/Users/odicfabi/Documents/jstl-1.2.jar"/>
+	<classpathentry kind="lib" path="C:/Users/odicfabi/Documents/rmi.jar"/>
 	<classpathentry kind="output" path="build/classes"/>
 </classpath>

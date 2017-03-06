@@ -13,7 +13,7 @@
 		//base.verifIdentification(manager.getIdentification())
 		System.out.println("Identification OK");
 		Manager.setIdentifie(true);
-		response.sendRedirect("ListerLivres.jsp");
+		response.sendRedirect("Accueil.jsp");
 	}else{
 		System.out.println("Identification KO");
 	}
@@ -25,9 +25,11 @@
 		<ul>
 		  	<li><a href="Accueil.jsp">Accueil</a></li>
 		  	<li><a href="Menus.jsp">Menus</a></li>
-		  	<li><a href="Contact.jsp">Contact</a></li>
+		  	<li><a href="GestionPlats.jsp">Gestion des plats</a></li>
+		  	<li><a href="GestionGroupes.jsp">Gestion des groupes</a></li>
 		  	<li style="float:right;"><a class="active" href="Connexion.jsp">Connexion</a></li>
 		</ul>
+		<br/>
 	</div>
 </div>
 <div class="row">
