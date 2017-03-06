@@ -19,19 +19,19 @@
 				<td>
 					<h3>La burrata</h3>
 					<img src="img/la-burrata.jpg"/>
-					<p>Câest un fromage frais Ã  base de lait de vache ou de bufflonne (moins courante) qui se compose de pÃ¢te filÃ©e Ã  lâextÃ©rieur, comme celle de la mozzarella, de stracciatella Ã  lâintÃ©rieur, câest-Ã -dire de petits morceaux de mozzarellastracciati, dÃ©chirÃ©s, et de crÃ¨me. Le nom de burrata, qui fait penser au beurre (burro en italien), est donc trompeur.</p>
+					<p>C'est un fromage frais � base de lait de vache ou de bufflonne (moins courante) qui se compose de p�te fil�e � l'ext�rieur, comme celle de la mozzarella, de stracciatella � l'int�rieur, c'est-�-dire de petits morceaux de mozzarellastracciati, d�chir�s, et de cr�me. Le nom de burrata, qui fait penser au beurre (burro en italien), est donc trompeur.</p>
 				</td>
 				<td>
 					<h3>Paccheri rigati asperges et pancetta</h3>
 					<img src="img/paccheri.jpg"/>
-					<p>Il sâagit des Paccheri rigati avec des asperges et des morceaux de pancetta en deux cuissons. 3 ingrÃ©dients simples qui se marient trÃ¨s bien.</p>
+					<p>Il s'agit des Paccheri rigati avec des asperges et des morceaux de pancetta en deux cuissons. 3 ingr�dients simples qui se marient tr�s bien.</p>
 				</td>
 			</tr>
 			<tr>
 				<td>
 					<h3>Zaletti</h3>
 					<img src="img/zaletti.jpg"/>
-					<p>Ces biscuits sont préparés dans plusieurs villes du nord de l’Italie avec souvent des variantes. Les ingrédients principaux restent la farine de maïs, les raisins secs et la grappa, trois produits du nord-est italien. Les zaletti sont souvent accompagnés de vin liquoreux.</p>
+					<p>Ces biscuits sont pr�par�s dans plusieurs villes du nord de l'Italie avec souvent des variantes. Les ingr�dients principaux restent la farine de ma�s, les raisins secs et la grappa, trois produits du nord-est italien. Les zaletti sont souvent accompagn�s de vin liquoreux.</p>
 				</td>
 			</tr>
 		</table>
