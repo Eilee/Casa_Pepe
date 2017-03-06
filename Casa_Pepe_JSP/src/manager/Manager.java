@@ -42,6 +42,18 @@ public class Manager {
 		}
 		return res;
 	}
+<<<<<<< HEAD
+	
+	public boolean recupereAllPlatsServ(){
+		boolean res = false;
+		try{
+			res = serveur.recupereAllPlats();
+		}catch(Exception e){
+			System.out.println("Exception - Client isIdentificationValid(id,mdp");
+		}
+		return res;
+	}
+=======
 	public Menu getMenu(String nom){
 		Menu res = null;
 		try {
@@ -87,4 +99,5 @@ public class Manager {
 		return res;
 	}
 
+>>>>>>> a33590e76f84c3592291b8d32655c1eee9c2647f
 }

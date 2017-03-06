@@ -7,11 +7,11 @@ function afficher(){
 <div class="row">
 	<div class="col-md-12">
 		<ul>
-		  	<li><a href="Accueil.jsp">Accueil</a></li>
-		  	<li><a href="Menus.jsp">Menus</a></li>
-		  	<li><a class="active" href="GestionPlats.jsp">Gestion des plats</a></li>
-		  	<li><a href="GestionGroupes.jsp">Gestion des groupes</a></li>
-		  	<li style="float:right;"><a href="Connexion.jsp">Connexion</a></li>
+		  	<li><a href="Accueil">Accueil</a></li>
+		  	<li><a href="Menus">Menus</a></li>
+		  	<li><a class="active" href="GestionPlats">Gestion des plats</a></li>
+		  	<li><a href="GestionGroupes">Gestion des groupes</a></li>
+		  	<li style="float:right;"><a href="Connexion">Connexion</a></li>
 		</ul>
 		<br/>
 	</div>
@@ -34,7 +34,7 @@ function afficher(){
 					<a href="Modification.jsp"><img src="img/modifier.png"/></a>
 				</td>
 				<td>
-					<a href=""><img src="img/supprimer.jpg" /></a>
+					<a href=""><img src="img/supprimer.png" /></a>
 				</td>
 			</tr>
 			<tr>
@@ -48,7 +48,7 @@ function afficher(){
 					<a href="Modification.jsp"><img src="img/modifier.png"/></a>
 				</td>
 				<td>
-					<a href=""><img src="img/supprimer.jpg" /></a>
+					<a href=""><img src="img/supprimer.png" /></a>
 				</td>
 			</tr>
 			<tr>
@@ -62,7 +62,7 @@ function afficher(){
 					<a href="Modification.jsp"><img src="img/modifier.png"/></a>
 				</td>
 				<td>
-					<a href=""><img src="img/supprimer.jpg" /></a>
+					<a href=""><img src="img/supprimer.png" /></a>
 				</td>
 			</tr>
 		</table>

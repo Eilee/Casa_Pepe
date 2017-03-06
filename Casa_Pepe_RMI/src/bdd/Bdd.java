@@ -68,7 +68,11 @@ public class Bdd {
 				res = true;
 			}
 		} catch (SQLException e) {
+<<<<<<< HEAD
+			System.out.println(e.getMessage());
+=======
 			System.out.println("Erreur Base.identIsValid "+e.getMessage());
+>>>>>>> a33590e76f84c3592291b8d32655c1eee9c2647f
 			e.printStackTrace();
 		}
 		
@@ -76,6 +80,29 @@ public class Bdd {
 		try {if (rs != null) rs.close();} catch (Exception e) {}
 		
 		return res;
+	}
+	
+	public boolean recupAllPlats(){
+		String sql ="SELECT * FROM `t_plat`,`t_groupe` WHERE `id_groupe`=`fk_id_grp`";
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		Menu menu = new Menu();
+		
+		try {
+			ps = connection.prepareStatement(sql);
+			System.out.println("sql = "+ps.toString());
+			rs = ps.executeQuery();
+			/*if(rs.next()){
+				menu.add(rs.getString("nom_plat"),rs.getString("desc_plat"),rs.getString("img_plat"),rs.getString("nom_grp"),rs.getString("prix_plat"));
+			}*/
+		} catch (SQLException e) {
+			System.out.println(e.getMessage());
+			e.printStackTrace();
+		}
+		
+		try {if (ps != null) ps.close();} catch (Exception e) {}
+		
+		return menu;
 	}
 
 	private boolean menuExist(String n){
