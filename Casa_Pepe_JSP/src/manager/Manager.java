@@ -3,7 +3,10 @@ package manager;
 import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
+import java.util.ArrayList;
 
+import bean.Menu;
+import bean.Plat;
 import rmi.ServeurInterface;
 
 public class Manager {
@@ -39,6 +42,7 @@ public class Manager {
 		}
 		return res;
 	}
+<<<<<<< HEAD
 	
 	public boolean recupereAllPlatsServ(){
 		boolean res = false;
@@ -49,4 +53,51 @@ public class Manager {
 		}
 		return res;
 	}
+=======
+	public Menu getMenu(String nom){
+		Menu res = null;
+		try {
+			res = serveur.getMenu(nom);
+			return res;
+		} catch (RemoteException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return res;
+	}
+	public ArrayList<Plat> getMenuPlat(int numMenu){
+		ArrayList<Plat> res = null;
+		try {
+			res = serveur.getMenuPlat(numMenu);
+			return res;
+		} catch (RemoteException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return res;
+	}
+	public ArrayList<Plat> getAllPlat(){
+		ArrayList<Plat> res = null;
+		try {
+			res = serveur.getAllPlat();
+			return res;
+		} catch (RemoteException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return res;
+	}
+	public Plat getPlat(int idPlat){
+		Plat res = null;
+		try {
+			res = serveur.getPlat(idPlat);
+			return res;
+		} catch (RemoteException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return res;
+	}
+
+>>>>>>> a33590e76f84c3592291b8d32655c1eee9c2647f
 }
