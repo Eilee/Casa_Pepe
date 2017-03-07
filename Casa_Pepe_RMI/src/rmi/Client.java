@@ -30,8 +30,9 @@ public class Client {
 		}
 		
 		try{
-			ArrayList<Plat> listMenu = serveur.getMenuPlat(4);
-			for(Plat p : listMenu){System.out.println(p.toString());}
+			System.out.println("bonjour");
+			Plat p = serveur.getPlat(4);
+			System.out.println(p.toString());
 
 
 		}catch(Exception e){

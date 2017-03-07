@@ -7,14 +7,15 @@ import annotation.Table;
 @Table(name="t_plat")
 public class Plat implements Serializable{
 
+	int imgMax = 800000;
 	String nom;
 	String description;
 	float prix;
-	Byte[] img = new Byte[512];
+	byte[] img = new byte[imgMax];
 	int groupe;
 	
 	public Plat(){};
-	public Plat(String n,String desc,float p,int g,Byte[] im){
+	public Plat(String n,String desc,float p,int g,byte[] im){
 		this.nom = n;
 		this.description = desc;
 		this.groupe =g;
@@ -40,10 +41,10 @@ public class Plat implements Serializable{
 	public void setPrix(float prix) {
 		this.prix = prix;
 	}
-	public Byte[] getImg() {
+	public byte[] getImg() {
 		return img;
 	}
-	public void setImg(Byte[] img) {
+	public void setImg(byte[] img) {
 		this.img = img;
 	}
 	public int getGroupe() {
@@ -54,7 +55,15 @@ public class Plat implements Serializable{
 	}
 	@Override
 	public String toString() {
-		return "Plat [nom=" + nom + ", description=" + description + ", prix=" + prix + ", groupe=" + groupe + "]";
+		return "Plat [nom=" + nom + ", description=" + description + ", prix=" + prix + ", groupe=" + groupe + ",img = {"+this.toStringImg()+"}]";
+	}
+	public int getImgMax(){return this.imgMax;}
+	public String toStringImg(){
+		String res = "";
+		for(int i = 0 ; i < img.length;i++){
+			res += img[i];
+		}
+		return res;
 	}
 	
 }

@@ -42,6 +42,8 @@ public class ServeurImpl implements ServeurInterface{
 	public Plat getPlat(int idPlat) throws RemoteException{
 		return base.getPlat(idPlat);
 	}
+	
+	
 
 	public static void main(String[] args){
 		int port = 20000;

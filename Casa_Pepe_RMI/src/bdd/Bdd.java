@@ -1,12 +1,12 @@
 package bdd;
 
+import java.sql.Blob;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.ResourceBundle;
 
 import bean.Menu;
@@ -179,6 +179,7 @@ public class Bdd {
 	public Plat getPlat(int idPlat){
 		Plat res = null;
 		String sql ="SELECT * FROM `t_plat` WHERE `id_plat` = ?";
+		//String sqlImg = "SELECT img_plat FROM t_plat WHERE id_plat = ?" ;
 		PreparedStatement ps = null;
 		ResultSet rs = null;
 		try {
@@ -193,7 +194,10 @@ public class Bdd {
 				res.setGroupe(rs.getInt("fk_id_grp"));
 				res.setPrix(rs.getFloat("prix_plat"));
 				//AJOUT DE L'IMAGE !!!!
-				
+				Blob blob = rs.getBlob("img_plat");
+				int blobLength =(int) blob.length();
+				res.setImg(blob.getBytes(1, blobLength));
+				blob.free();
 				System.out.println(res.toString());
 				return res;
 			}
@@ -205,4 +209,5 @@ public class Bdd {
 		try {if (rs != null) rs.close();} catch (Exception e) {}
 		return res;
 	}
+
 }
