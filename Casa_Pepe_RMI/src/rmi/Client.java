@@ -31,18 +31,16 @@ public class Client {
 		}
 		
 		try{
-/*			Menu m1 = serveur.getMenu("Menu de la mer");
-			System.out.println(m1);
-			ArrayList<Plat> list = m1.getListPlat();
-			for(Plat p : list){System.out.println(p.getNom());}
-			Menu m2 = serveur.getMenu("Menu de la terre");
-			System.out.println(m2);
-			ArrayList<Plat> list2 = m2.getListPlat();
-			for(Plat p : list2){System.out.println(p.getNom());}
-*/
-			ArrayList<Menu> listMenu = new ArrayList<Menu>();
-			listMenu = serveur.getAllMenu();
-			for(Menu m : listMenu){System.out.println(m.toString()+" -> "+m.getListPlat());}
+			if(serveur.createGroupe("test")){
+				System.out.println("Create OK");
+			}else{
+				System.out.println("Create KO");
+			}
+			if(serveur.deleteGroupe("test")){
+				System.out.println("Delete OK");
+			}else{
+				System.out.println("Delete KO");
+			}
 		}catch(Exception e){
 			System.out.println(e);
 		}

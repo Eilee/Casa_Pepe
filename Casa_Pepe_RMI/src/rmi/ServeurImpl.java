@@ -15,6 +15,7 @@ public class ServeurImpl implements ServeurInterface{
 
 	Bdd base = new Bdd();
 	
+	//Ouverture et fermeture de la BDD
 	public boolean ouvrirBdd(){
 		if(base.ouvrir()){
 			System.out.println("Bdd ouverte - OK !");
@@ -28,9 +29,12 @@ public class ServeurImpl implements ServeurInterface{
 		base.fermer();
 	}
 
+	// Test si existant
 	public boolean identificationValid(String id,String mdp) throws RemoteException{
 		return base.identIsValid(id, mdp);
 	}
+
+	//Accesseur
 	public ArrayList<Menu> getAllMenu() throws RemoteException{
 		return base.getAllMenu();
 	}
@@ -49,8 +53,23 @@ public class ServeurImpl implements ServeurInterface{
 	public ArrayList<Groupe> getAllGroupe() throws RemoteException{
 		return base.getAllGroupe();
 	}
+	public Groupe getGroupe(int idGroupe) throws RemoteException{
+		return base.getGroupe(idGroupe);
+	}
 	
+	//Gestion des entitées
+	public boolean deletePlat(Plat p) throws RemoteException{
+		return base.deletePlat(p);
+	}
 
+	public boolean createGroupe(String nomGroupe) throws RemoteException{
+		return base.createGroupe(nomGroupe);
+	}
+	public boolean deleteGroupe(String nomGroupe) throws RemoteException{
+		return base.deleteGroupe(nomGroupe);
+	}
+	
+	
 	public static void main(String[] args){
 		int port = 20000;
 		ServeurImpl si = new ServeurImpl();

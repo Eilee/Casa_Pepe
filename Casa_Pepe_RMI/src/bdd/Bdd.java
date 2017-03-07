@@ -31,6 +31,7 @@ public class Bdd {
 		System.out.println("pwd = "+pwd);
 	}
 	
+	//Fonction d'ouverture et fermeture de la BDD
 	public boolean ouvrir() {
 		boolean res = false;
 		try {
@@ -42,7 +43,6 @@ public class Bdd {
 		}
 		return res;
 	}
-	
 	public void fermer() {
 		try {
 			if (connection != null) connection.close();
@@ -54,6 +54,7 @@ public class Bdd {
 
 	}
 	
+	//Test si existant
 	public boolean identIsValid(String id,String mdp){
 		boolean res = false;
 		String sql ="SELECT ident_admin FROM `t_administrateur` WHERE `ident_admin` = ? AND`mdp_admin` = ?";
@@ -79,7 +80,6 @@ public class Bdd {
 		
 		return res;
 	}
-
 	private boolean menuExist(String n){
 		boolean res = false;
 		String sql ="SELECT nom_menu FROM `t_menu` WHERE `nom_menu` = ?";
@@ -101,6 +101,50 @@ public class Bdd {
 		try {if (rs != null) rs.close();} catch (Exception e) {}
 		return res;
 	}
+	public boolean platExist(String nom){
+		boolean res = false;
+		String sql ="SELECT nom_plat FROM `t_plat` WHERE `nom_plat` = ?";
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		try {
+			ps = connection.prepareStatement(sql);
+			ps.setString(1,nom);
+			rs = ps.executeQuery();
+			if(rs.next()){
+				System.out.println(rs.getString("nom_plat") +" exist !");
+				res = true;
+			}
+		} catch (SQLException e) {
+			System.out.println("Erreur Base.platExist "+e.getMessage());
+			e.printStackTrace();
+		}
+		try {if (ps != null) ps.close();} catch (Exception e) {}
+		try {if (rs != null) rs.close();} catch (Exception e) {}
+		return res;
+	}
+	public boolean groupeExist(String nom){
+		boolean res = false;
+		String sql ="SELECT nom_groupe FROM `t_groupe` WHERE `nom_groupe` = ?";
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		try {
+			ps = connection.prepareStatement(sql);
+			ps.setString(1,nom);
+			rs = ps.executeQuery();
+			if(rs.next()){
+				System.out.println(rs.getString("nom_groupe") +" exist !");
+				res = true;
+			}
+		} catch (SQLException e) {
+			System.out.println("Erreur Base.groupExist "+e.getMessage());
+			e.printStackTrace();
+		}
+		try {if (ps != null) ps.close();} catch (Exception e) {}
+		try {if (rs != null) rs.close();} catch (Exception e) {}
+		return res;
+	}
+
+	//Accesseur
 	public ArrayList<Menu> getAllMenu(){
 		ArrayList<Menu> res = new ArrayList<Menu>();
 		String sql = "SELECT nom_menu FROM t_menu";
@@ -151,8 +195,7 @@ public class Bdd {
 		}
 
 		return res;
-	}
-	
+	}	
 	public ArrayList<Plat> getMenuPlat(int numMenu){
 		ArrayList<Plat> list = new ArrayList<Plat>();
 		String sqlContient = "SELECT id_plat FROM `t_contient` WHERE `id_menu` = ?";
@@ -175,7 +218,6 @@ public class Bdd {
 		try {if (rs != null) rs.close();} catch (Exception e) {}
 		return list;
 	}
-	
 	public ArrayList<Plat> getAllPlat(){
 		ArrayList<Plat> list = new ArrayList<Plat>();
 		String sqlContient = "SELECT * FROM `t_plat`,`t_groupe` WHERE `id_groupe`=`fk_id_grp`";
@@ -228,7 +270,6 @@ public class Bdd {
 		try {if (rs != null) rs.close();} catch (Exception e) {}
 		return res;
 	}
-	
 	public ArrayList<Groupe> getAllGroupe(){
 		ArrayList<Groupe> list = new ArrayList<Groupe>();
 		String sqlContient = "SELECT * FROM `t_groupe`";
@@ -250,7 +291,6 @@ public class Bdd {
 		try {if (rs != null) rs.close();} catch (Exception e) {}
 		return list;
 	}
-	
 	public Groupe getGroupe(int idGroupe){
 		Groupe res = null;
 		String sql ="SELECT * FROM `t_groupe` WHERE `id_groupe` = ?";
@@ -275,4 +315,102 @@ public class Bdd {
 		try {if (rs != null) rs.close();} catch (Exception e) {}
 		return res;
 	}
+
+	//Gestion des  entitées
+	/*
+	public Boolean createPlat(Plat p){
+		boolean res = false;
+		String req = "INSERT INTO `t_plat`(`nom_plat`, `desc_plat`, `img_plat`, `fk_id_grp`, `prix_plat`) VALUES (?,?,?,?,?)";
+		if(!platExist(p.getNom())){
+			if(groupeExist(p.getGroupe())){
+				PreparedStatement ps = null;
+				ResultSet rs = null;
+				try {
+					ps = connection.prepareStatement(req);
+					ps.setString(1,p.getNom());
+					ps.setString(2,p.getDescription());
+					//Ajout de l'image
+					ps.setBlob(3, );
+					ps.setInt(4, p.getGroupe());
+					ps.setFloat(5,p.getPrix());
+					rs = ps.executeQuery();
+					if(rs.next()){
+						System.out.println(rs.getString("nom_plat") +" exist !");
+						res = true;
+					}
+				} catch (SQLException e) {
+					System.out.println("Erreur Base.platExist "+e.getMessage());
+					e.printStackTrace();
+				}
+				try {if (ps != null) ps.close();} catch (Exception e) {}
+				try {if (rs != null) rs.close();} catch (Exception e) {}
+			}
+		}
+	}
+*/
+	public boolean deletePlat(Plat p){
+		boolean res = false;
+		int idPlat;
+		String reqPlat = "SELECT id_plat FROM `t_plat` WHERE `nom_plat` = ?";
+		String reqDelete ="DELETE FROM `t_plat` WHERE id_plat = ?";
+		PreparedStatement psPlat = null;
+		PreparedStatement psDelete = null;
+		ResultSet rsPlat = null;
+		if(platExist(p.getNom())){
+			try{
+				psPlat = connection.prepareStatement(reqPlat);
+				psPlat.setString(1, p.getNom());
+				rsPlat = psPlat.executeQuery();
+				if(rsPlat.next()){
+					idPlat = rsPlat.getInt("id_plat");
+					psDelete = connection.prepareStatement(reqDelete);
+					psDelete.setInt(1, idPlat);
+					res = psDelete.execute();
+				}		
+			}catch(Exception e){
+				System.out.println("Erreur Base.deletePlat");
+			}
+			try {if (psPlat != null) psPlat.close();} catch (Exception e) {}
+			try {if (rsPlat != null) rsPlat.close();} catch (Exception e) {}
+			try {if (psDelete != null) psDelete.close();} catch (Exception e) {}
+			return res;
+		}
+		
+		return res;
+	}
+	
+	public boolean createGroupe(String nomGroupe){
+		boolean res = false;
+		String req = "INSERT INTO `t_groupe`(`nom_groupe`) VALUES (?)";
+		if(!groupeExist(nomGroupe)){
+			PreparedStatement ps = null;
+			ResultSet rs = null;
+			try{
+				ps = connection.prepareStatement(req);
+				ps.setString(1, nomGroupe);
+				ps.execute();
+				res = true;
+			}catch(Exception e){
+				System.out.println("Erreur Base.CreateGroupe");
+			}
+		}
+		return res;
+	}
+	public boolean deleteGroupe(String nomGroupe){
+		boolean res = false;
+		String req = "DELETE FROM `t_groupe` WHERE nom_groupe = ?";
+		if(groupeExist(nomGroupe)){
+			PreparedStatement ps = null;
+			try{
+				ps = connection.prepareStatement(req);
+				ps.setString(1, nomGroupe);
+				ps.execute();
+				res = true;
+			}catch(Exception e){
+				System.out.println("Erreur Base.CreateGroupe");
+			}
+		}
+		return res;
+	}
+	
 }
