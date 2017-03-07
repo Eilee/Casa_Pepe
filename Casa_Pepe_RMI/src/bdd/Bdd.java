@@ -67,6 +67,7 @@ public class Bdd {
 				System.out.println(rs.getString("ident_admin"));
 				res = true;
 			}
+
 		} catch (SQLException e) {
 			System.out.println("Erreur Base.identIsValid "+e.getMessage());
 			e.printStackTrace();
