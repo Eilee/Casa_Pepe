@@ -15,4 +15,5 @@ public interface ServeurInterface extends Remote {
 	public ArrayList<Plat> getAllPlat() throws RemoteException;
 	public Plat getPlat(int idPlat) throws RemoteException;
 	public ArrayList<Groupe> getAllGroupe() throws RemoteException;
+	public ArrayList<Menu> getAllMenu() throws RemoteException;
 }

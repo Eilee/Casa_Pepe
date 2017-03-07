@@ -101,7 +101,28 @@ public class Bdd {
 		try {if (rs != null) rs.close();} catch (Exception e) {}
 		return res;
 	}
-	
+	public ArrayList<Menu> getAllMenu(){
+		ArrayList<Menu> res = new ArrayList<Menu>();
+		String sql = "SELECT nom_menu FROM t_menu";
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		
+		try {
+			ps = connection.prepareStatement(sql);
+			rs = ps.executeQuery();
+			while(rs.next()){
+				String nomMenu = rs.getString("nom_menu");
+				System.out.println(nomMenu);
+				res.add(this.getMenu(nomMenu));
+			}
+		} catch (SQLException e) {
+			System.out.println("Erreur Base.getMenu "+e.getMessage());
+			e.printStackTrace();
+		}
+		try {if (ps != null) ps.close();} catch (Exception e) {}
+		try {if (rs != null) rs.close();} catch (Exception e) {}
+		return res;
+	}
 	public Menu getMenu(String nom){
 		Menu res = null;
 		if(menuExist(nom)){
@@ -115,7 +136,6 @@ public class Bdd {
 				rs = ps.executeQuery();
 				//Si le menu existe en BDD on crée un menu avec ce nom
 				if(rs.next()){
-					System.out.println(rs.getString("nom_menu"));
 					res = new Menu(rs.getString("nom_menu"));
 					
 					//Puis on va charger la liste des plat qu'il contient
@@ -198,7 +218,6 @@ public class Bdd {
 				int blobLength =(int) blob.length();
 				res.setImg(blob.getBytes(1, blobLength));
 				blob.free();
-				System.out.println(res.toString());
 				return res;
 			}
 		} catch (SQLException e) {
