@@ -40,7 +40,7 @@ private static final long serialVersionUID = 1L;
 		Manager manager = (Manager) request.getSession().getAttribute("Manager");
 		if(manager.isIdentificationValid(ident, mdp)){
 			System.out.println("Identification OK");
-			response.sendRedirect("Accueil.jsp");
+			response.sendRedirect("Accueil");
 			//passage de la session dans la request
 			//request.setAttribute(request.getSession(), arg1);
 		}else{
