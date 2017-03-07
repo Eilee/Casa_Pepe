@@ -38,6 +38,6 @@ public class Menu implements Serializable{
 	}
 	@Override
 	public String toString() {
-		return "Menu [nom=" + nom + ", listPlat=" + listPlat + "]";
+		return "Menu [nom=" + nom + ",]";
 	}
 }

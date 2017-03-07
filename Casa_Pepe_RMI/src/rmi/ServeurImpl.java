@@ -30,6 +30,9 @@ public class ServeurImpl implements ServeurInterface{
 	public boolean identificationValid(String id,String mdp) throws RemoteException{
 		return base.identIsValid(id, mdp);
 	}
+	public ArrayList<Menu> getAllMenu() throws RemoteException{
+		return base.getAllMenu();
+	}
 	public Menu getMenu(String nom) throws RemoteException{
 		return base.getMenu(nom);
 	}
