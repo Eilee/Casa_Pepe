@@ -16,4 +16,8 @@ public interface ServeurInterface extends Remote {
 	public Plat getPlat(int idPlat) throws RemoteException;
 	public ArrayList<Groupe> getAllGroupe() throws RemoteException;
 	public ArrayList<Menu> getAllMenu() throws RemoteException;
+	public Groupe getGroupe(int idGroupe) throws RemoteException;
+	public boolean deletePlat(Plat p) throws RemoteException;
+	public boolean createGroupe(String nomGroupe) throws RemoteException;
+	public boolean deleteGroupe(String nomGroue) throws RemoteException;
 }

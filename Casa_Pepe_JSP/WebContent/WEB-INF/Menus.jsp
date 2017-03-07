@@ -23,7 +23,7 @@
 			        	<tr>
 			        <%} %>
 			            <td>
-			            	<h4>${listPlat.getNom()}<i>&nbsp;&nbsp;(${listPlat.getGroupe()})</i></h4>
+			            	<h4>${listPlat.getNom()}<i>&nbsp;(${listPlat.getGroupe()})</i></h4>
 			            	<img id="${listPlat.getNom()}" src="data:image/jpg;base64,${listPlat.getImgValue()}"/>
 							<p>${listPlat.getDescription()}</p>
 						</td>
