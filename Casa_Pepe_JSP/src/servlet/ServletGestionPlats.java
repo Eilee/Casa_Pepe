@@ -38,16 +38,11 @@ public class ServletGestionPlats extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		/*Manager manager = (Manager) request.getSession().getAttribute("Manager");
-		ArrayList<Plat> listPlats = null;
-		if((listPlats = manager.getAllPlat())!=null){
-			System.out.println("GestionPlats OK");
-			response.sendRedirect("GestionPlats");
-			//passage de la session dans la request
-			//request.setAttribute(request.getSession(), arg1);
-		}else{
-			System.out.println("GestionPlats KO");
-			doGet(request,response);
-		}*/
+		System.out.println("doPost Gestion Plats");
+		Manager manager = (Manager) request.getSession().getAttribute("Manager");
+		String nomPlat = request.getParameter("delete");
+		System.out.println("Suppression du plats : "+nomPlat);
+		manager.deletePlat(nomPlat);
+		doGet(request,response);
 	}
 }

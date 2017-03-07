@@ -109,4 +109,17 @@ public class Manager {
 		}
 		return res;
 	}
+	public boolean deletePlat(String nomPlat){
+		boolean res = false;
+		Plat p = new Plat();
+		p.setNom(nomPlat);
+		try {
+			res = serveur.deletePlat(p);
+			return res;
+		} catch (RemoteException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return res;
+	}
 }

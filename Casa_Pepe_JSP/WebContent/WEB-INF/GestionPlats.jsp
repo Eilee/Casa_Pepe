@@ -17,6 +17,7 @@ function afficher(){
 	</div>
 </div>
 <div class="row">
+	<form method="post"><a href="Creation"><img src="img/creer.jpg" style="float:right;	width:160px;height:40px;"></a></input>
 	<div class="col-md-12 tableGestion tableIcone">
 		<table>
 			<tr>
@@ -32,7 +33,7 @@ function afficher(){
 		            <td>${listPlat.getGroupe()}</td>
 		            <td>${listPlat.getPrix()}</td>
 		            <td><a href="Modification"><img src="img/modifier.png"/></a></td>
-					<td><a href=""><img src="img/supprimer.png" /></a></td>
+					<td><form method="post" onsubmit="return confirm('Voulez-vous vraiment supprimer ce plats ?');"><input name="delete" value="${listPlat.getNom()}" type="hidden"/><input type="image" src="img/supprimer.png" border="0" alt="Submit" /></input></form></td>
 		        </tr>
 		    </c:forEach>
 		</table>
