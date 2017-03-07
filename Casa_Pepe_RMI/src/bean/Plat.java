@@ -12,10 +12,10 @@ public class Plat implements Serializable{
 	String description;
 	float prix;
 	byte[] img = new byte[imgMax];
-	int groupe;
+	String groupe;
 	
 	public Plat(){};
-	public Plat(String n,String desc,float p,int g,byte[] im){
+	public Plat(String n,String desc,float p,String g,byte[] im){
 		this.nom = n;
 		this.description = desc;
 		this.groupe =g;
@@ -47,10 +47,10 @@ public class Plat implements Serializable{
 	public void setImg(byte[] img) {
 		this.img = img;
 	}
-	public int getGroupe() {
+	public String getGroupe() {
 		return groupe;
 	}
-	public void setGroupe(int groupe) {
+	public void setGroupe(String groupe) {
 		this.groupe = groupe;
 	}
 	@Override

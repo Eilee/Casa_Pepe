@@ -142,7 +142,7 @@ public class Bdd {
 			ps.setInt(1,numMenu);
 			rs = ps.executeQuery();
 			//Si le menu existe en BDD on crée un menu avec ce nom
-			if(rs.next()){
+			while(rs.next()){
 				int id = rs.getInt("id_plat");
 				list.add(this.getPlat(id));
 			}
@@ -157,14 +157,14 @@ public class Bdd {
 	
 	public ArrayList<Plat> getAllPlat(){
 		ArrayList<Plat> list = new ArrayList<Plat>();
-		String sqlContient = "SELECT * FROM `t_plat`";
+		String sqlContient = "SELECT * FROM `t_plat`,`t_groupe` WHERE `id_groupe`=`fk_id_grp`";
 		PreparedStatement ps = null;
 		ResultSet rs = null;
 		try {
 			ps = connection.prepareStatement(sqlContient);
 			rs = ps.executeQuery();
 			//Si le menu existe en BDD on crée un menu avec ce nom
-			if(rs.next()){
+			while(rs.next()){
 				int id = rs.getInt("id_plat");
 				list.add(this.getPlat(id));
 			}
@@ -178,8 +178,7 @@ public class Bdd {
 	}
 	public Plat getPlat(int idPlat){
 		Plat res = null;
-		String sql ="SELECT * FROM `t_plat` WHERE `id_plat` = ?";
-		//String sqlImg = "SELECT img_plat FROM t_plat WHERE id_plat = ?" ;
+		String sql ="SELECT * FROM `t_plat`,`t_groupe` WHERE `id_plat` = ? AND `id_groupe`=`fk_id_grp`";
 		PreparedStatement ps = null;
 		ResultSet rs = null;
 		try {
@@ -191,7 +190,7 @@ public class Bdd {
 				res = new Plat();
 				res.setNom(rs.getString("nom_plat"));
 				res.setDescription(rs.getString("desc_plat"));
-				res.setGroupe(rs.getInt("fk_id_grp"));
+				res.setGroupe(rs.getString("nom_groupe"));
 				res.setPrix(rs.getFloat("prix_plat"));
 				//AJOUT DE L'IMAGE !!!!
 				Blob blob = rs.getBlob("img_plat");
