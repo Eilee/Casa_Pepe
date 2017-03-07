@@ -1,6 +1,9 @@
 package bean;
 
 import java.io.Serializable;
+import java.io.UnsupportedEncodingException;
+
+import org.apache.tomcat.util.codec.binary.Base64;
 
 import annotation.Table;
 
@@ -12,6 +15,7 @@ public class Plat implements Serializable{
 	String description;
 	float prix;
 	byte[] img = new byte[imgMax];
+	String imgValue;
 	String groupe;
 	
 	public Plat(){};
@@ -45,7 +49,16 @@ public class Plat implements Serializable{
 		return img;
 	}
 	public void setImg(byte[] img) {
-		this.img = img;
+		byte[] encodeBase64 = Base64.encodeBase64(img);
+         try {
+			this.imgValue = new String(encodeBase64, "UTF-8");
+		} catch (UnsupportedEncodingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	public String getImgValue() {
+		return this.imgValue;
 	}
 	public String getGroupe() {
 		return groupe;

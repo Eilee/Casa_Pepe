@@ -30,7 +30,6 @@ public class ServletGestionPlats extends HttpServlet {
 		System.out.println("doGet Gestion Plats");
 		Manager manager = (Manager) request.getSession().getAttribute("Manager");
 		ArrayList<Plat> listPlats = manager.getAllPlat();
-		System.out.println("GestionPlats OK");
 		request.setAttribute("listPlats", listPlats);
 		request.getServletContext().getRequestDispatcher("/WEB-INF/GestionPlats.jsp").forward(request, response);
 	}

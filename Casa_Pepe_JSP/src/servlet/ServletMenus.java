@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import bean.Menu;
 import bean.Plat;
 import manager.Manager;
 
@@ -28,10 +29,10 @@ public class ServletMenus extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		System.out.println("doGet Menus");
-		/*Manager manager = (Manager) request.getSession().getAttribute("Manager");
-		ArrayList<Menu> listMenus = manager.getAllMenus();
+		Manager manager = (Manager) request.getSession().getAttribute("Manager");
+		ArrayList<Menu> listMenus = manager.getAllMenu();
 		System.out.println("Menus OK");
-		request.setAttribute("listMenus", listMenus);*/
+		request.setAttribute("listMenus", listMenus);
 		request.getServletContext().getRequestDispatcher("/WEB-INF/Menus.jsp").forward(request, response);
 	}
 

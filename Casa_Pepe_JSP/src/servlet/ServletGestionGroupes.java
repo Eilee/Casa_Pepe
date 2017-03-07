@@ -31,8 +31,6 @@ public class ServletGestionGroupes extends HttpServlet {
 		System.out.println("doGet Gestion Groupes");
 		Manager manager = (Manager) request.getSession().getAttribute("Manager");
 		ArrayList<Groupe> listGroupes = manager.getAllGroupe();
-		System.out.println(listGroupes.size());
-		System.out.println("GestionGroupes OK");
 		request.setAttribute("listGroupes", listGroupes);
 		request.getServletContext().getRequestDispatcher("/WEB-INF/GestionGroupes.jsp").forward(request, response);
 		

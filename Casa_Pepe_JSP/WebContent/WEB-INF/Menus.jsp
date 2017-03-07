@@ -17,22 +17,23 @@
 		<c:forEach items="${listMenus}" var="listMenu">
 			<table>
 				<caption><h2>${listMenu.getNom()}</h2></caption>
-				<c:forEach items="${listMenu}" var="listPlat">
-			        <tr>
+				<%int i=0;%>
+				<c:forEach items="${listMenu.getListPlat()}" var="listPlat">
+			        <%if((i%2)==0){%>
+			        	<tr>
+			        <%} %>
 			            <td>
-			            	<h4>${listPlat.getNom()}</h4>
-							<img src="img/la-burrata.jpg"/>
+			            	<h4>${listPlat.getNom()}<i>&nbsp;&nbsp;(${listPlat.getGroupe()})</i></h4>
+			            	<img id="${listPlat.getNom()}" src="data:image/jpg;base64,${listPlat.getImgValue()}"/>
 							<p>${listPlat.getDescription()}</p>
 						</td>
-			            <td>
-			            	<h4>${listPlat.getNom()}</h4>
-							<img src="img/la-burrata.jpg"/>
-							<p>${listPlat.getDescription()}</p>
-						</td>
-			        </tr>
+					<%if((i%2)!=0){%>
+						</tr>
+					<%}
+			        i++;%>
 	    		</c:forEach>
 		 	</table>
 	    </c:forEach>
 	</div>
-</div>
+</div>			
 <%@include file="Footer.jsp" %>

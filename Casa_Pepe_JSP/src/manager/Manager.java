@@ -43,7 +43,17 @@ public class Manager {
 		}
 		return res;
 	}
-
+	public ArrayList<Menu> getAllMenu(){
+		ArrayList<Menu> res = null;
+		try {
+			res = serveur.getAllMenu();
+			return res;
+		} catch (RemoteException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return res;
+	}
 	public Menu getMenu(String nom){
 		Menu res = null;
 		try {
