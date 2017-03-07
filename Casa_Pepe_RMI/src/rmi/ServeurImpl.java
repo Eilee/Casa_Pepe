@@ -7,6 +7,7 @@ import java.rmi.server.UnicastRemoteObject;
 import java.util.ArrayList;
 
 import bdd.Bdd;
+import bean.Groupe;
 import bean.Menu;
 import bean.Plat;
 
@@ -42,7 +43,9 @@ public class ServeurImpl implements ServeurInterface{
 	public Plat getPlat(int idPlat) throws RemoteException{
 		return base.getPlat(idPlat);
 	}
-	
+	public ArrayList<Groupe> getAllGroupe() throws RemoteException{
+		return base.getAllGroupe();
+	}
 	
 
 	public static void main(String[] args){

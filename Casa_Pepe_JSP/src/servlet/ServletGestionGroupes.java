@@ -1,6 +1,7 @@
 package servlet;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -8,6 +9,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import bean.Groupe;
+import bean.Plat;
 import manager.Manager;
 
 @WebServlet("/GestionGroupes")
@@ -25,8 +28,12 @@ public class ServletGestionGroupes extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		//Simple chargement de la page , aucun traitement
 		System.out.println("doGet Gestion Groupes");
+		Manager manager = (Manager) request.getSession().getAttribute("Manager");
+		ArrayList<Groupe> listGroupes = manager.getAllGroupe();
+		System.out.println(listGroupes.size());
+		System.out.println("GestionGroupes OK");
+		request.setAttribute("listGroupes", listGroupes);
 		request.getServletContext().getRequestDispatcher("/WEB-INF/GestionGroupes.jsp").forward(request, response);
 		
 	}

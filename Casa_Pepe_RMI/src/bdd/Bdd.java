@@ -9,6 +9,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 
+import bean.Groupe;
 import bean.Menu;
 import bean.Plat;
 
@@ -208,5 +209,51 @@ public class Bdd {
 		try {if (rs != null) rs.close();} catch (Exception e) {}
 		return res;
 	}
-
+	
+	public ArrayList<Groupe> getAllGroupe(){
+		ArrayList<Groupe> list = new ArrayList<Groupe>();
+		String sqlContient = "SELECT * FROM `t_groupe`";
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		try {
+			ps = connection.prepareStatement(sqlContient);
+			rs = ps.executeQuery();
+			//Si le menu existe en BDD on crée un menu avec ce nom
+			while(rs.next()){
+				int id = rs.getInt("id_groupe");
+				list.add(this.getGroupe(id));
+			}
+		} catch (SQLException e) {
+			System.out.println("Erreur Base.getAllGroupe "+e.getMessage());
+			e.printStackTrace();
+		}
+		try {if (ps != null) ps.close();} catch (Exception e) {}
+		try {if (rs != null) rs.close();} catch (Exception e) {}
+		return list;
+	}
+	
+	public Groupe getGroupe(int idGroupe){
+		Groupe res = null;
+		String sql ="SELECT * FROM `t_groupe` WHERE `id_groupe` = ?";
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		try {
+			ps = connection.prepareStatement(sql);
+			ps.setInt(1,idGroupe);
+			rs = ps.executeQuery();
+			//Si le groupe existe en BDD on crée un groupe avec ce nom
+			if(rs.next()){
+				res = new Groupe();
+				res.setNom(rs.getString("nom_groupe"));
+				System.out.println(res.toString());
+				return res;
+			}
+		} catch (SQLException e) {
+			System.out.println("Erreur Base.getGroupe "+e.getMessage());
+			e.printStackTrace();
+		}
+		try {if (ps != null) ps.close();} catch (Exception e) {}
+		try {if (rs != null) rs.close();} catch (Exception e) {}
+		return res;
+	}
 }

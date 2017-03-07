@@ -5,6 +5,7 @@ import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 import java.util.ArrayList;
 
+import bean.Groupe;
 import bean.Menu;
 import bean.Plat;
 import rmi.ServeurInterface;
@@ -80,6 +81,17 @@ public class Manager {
 		Plat res = null;
 		try {
 			res = serveur.getPlat(idPlat);
+			return res;
+		} catch (RemoteException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return res;
+	}
+	public ArrayList<Groupe> getAllGroupe(){
+		ArrayList<Groupe> res = null;
+		try {
+			res = serveur.getAllGroupe();
 			return res;
 		} catch (RemoteException e) {
 			// TODO Auto-generated catch block

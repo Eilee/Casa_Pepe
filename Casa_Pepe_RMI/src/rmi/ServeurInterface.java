@@ -4,6 +4,7 @@ import java.rmi.Remote;
 import java.rmi.RemoteException;
 import java.util.ArrayList;
 
+import bean.Groupe;
 import bean.Menu;
 import bean.Plat;
 
@@ -13,4 +14,5 @@ public interface ServeurInterface extends Remote {
 	public ArrayList<Plat> getMenuPlat(int numMenu) throws RemoteException;
 	public ArrayList<Plat> getAllPlat() throws RemoteException;
 	public Plat getPlat(int idPlat) throws RemoteException;
+	public ArrayList<Groupe> getAllGroupe() throws RemoteException;
 }

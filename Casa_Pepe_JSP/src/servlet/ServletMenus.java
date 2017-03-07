@@ -1,6 +1,7 @@
 package servlet;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -26,8 +27,11 @@ public class ServletMenus extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		//Simple chargement de la page , aucun traitement
 		System.out.println("doGet Menus");
+		/*Manager manager = (Manager) request.getSession().getAttribute("Manager");
+		ArrayList<Menu> listMenus = manager.getAllMenus();
+		System.out.println("Menus OK");
+		request.setAttribute("listMenus", listMenus);*/
 		request.getServletContext().getRequestDispatcher("/WEB-INF/Menus.jsp").forward(request, response);
 	}
 

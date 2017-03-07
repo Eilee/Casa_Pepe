@@ -4,8 +4,8 @@
 		<ul>
 		  	<li><a href="Accueil">Accueil</a></li>
 		  	<li><a href="Menus">Menus</a></li>
-		  	<li><a href="GestionPlats">Gestion des plats</a></li>
-		  	<li><a href="GestionGroupes">Gestion des groupes</a></li>
+		  	<li><a href="GestionPlats">Plats</a></li>
+		  	<li><a href="GestionGroupes">Groupes</a></li>
 		  	<li style="float:right;"><a class="active" href="Connexion">Connexion</a></li>
 		</ul>
 		<br/>
