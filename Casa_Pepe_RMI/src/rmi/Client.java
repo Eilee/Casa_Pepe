@@ -3,9 +3,8 @@ package rmi;
 import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
-import java.util.ArrayList;
 
-import bean.Menu;
+import bean.Photo;
 import bean.Plat;
 
 public class Client {
@@ -31,15 +30,12 @@ public class Client {
 		}
 		
 		try{
-			if(serveur.createGroupe("test")){
-				System.out.println("Create OK");
+			Plat p = new Plat();
+			p = serveur.getPlat(19);
+			if(serveur.deletePlat(p)){
+				System.out.println("OK");
 			}else{
-				System.out.println("Create KO");
-			}
-			if(serveur.deleteGroupe("test")){
-				System.out.println("Delete OK");
-			}else{
-				System.out.println("Delete KO");
+				System.out.println("KO");
 			}
 		}catch(Exception e){
 			System.out.println(e);

@@ -1,5 +1,6 @@
 package bdd;
 
+import java.io.ByteArrayInputStream;
 import java.sql.Blob;
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -11,6 +12,7 @@ import java.util.ResourceBundle;
 
 import bean.Groupe;
 import bean.Menu;
+import bean.Photo;
 import bean.Plat;
 
 public class Bdd {
@@ -143,6 +145,27 @@ public class Bdd {
 		try {if (rs != null) rs.close();} catch (Exception e) {}
 		return res;
 	}
+	public boolean photoExist(int idPhoto){
+		boolean res = false;
+		String sql ="SELECT id_photo FROM `t_photo` WHERE `id_photo` = ?";
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		try {
+			ps = connection.prepareStatement(sql);
+			ps.setInt(1,idPhoto);
+			rs = ps.executeQuery();
+			if(rs.next()){
+				System.out.println("photo "+rs.getString("id_photo") +" exist !");
+				res = true;
+			}
+		} catch (SQLException e) {
+			System.out.println("Erreur Base.groupExist "+e.getMessage());
+			e.printStackTrace();
+		}
+		try {if (ps != null) ps.close();} catch (Exception e) {}
+		try {if (rs != null) rs.close();} catch (Exception e) {}
+		return res;
+	}
 
 	//Accesseur
 	public ArrayList<Menu> getAllMenu(){
@@ -255,11 +278,7 @@ public class Bdd {
 				res.setDescription(rs.getString("desc_plat"));
 				res.setGroupe(rs.getString("nom_groupe"));
 				res.setPrix(rs.getFloat("prix_plat"));
-				//AJOUT DE L'IMAGE !!!!
-				Blob blob = rs.getBlob("img_plat");
-				int blobLength =(int) blob.length();
-				res.setImg(blob.getBytes(1, blobLength));
-				blob.free();
+				res.setIdPhoto(rs.getInt("fk_img_plat"));
 				return res;
 			}
 		} catch (SQLException e) {
@@ -315,39 +334,86 @@ public class Bdd {
 		try {if (rs != null) rs.close();} catch (Exception e) {}
 		return res;
 	}
-
-	//Gestion des  entitées
-	/*
-	public Boolean createPlat(Plat p){
-		boolean res = false;
-		String req = "INSERT INTO `t_plat`(`nom_plat`, `desc_plat`, `img_plat`, `fk_id_grp`, `prix_plat`) VALUES (?,?,?,?,?)";
-		if(!platExist(p.getNom())){
-			if(groupeExist(p.getGroupe())){
-				PreparedStatement ps = null;
-				ResultSet rs = null;
-				try {
-					ps = connection.prepareStatement(req);
-					ps.setString(1,p.getNom());
-					ps.setString(2,p.getDescription());
-					//Ajout de l'image
-					ps.setBlob(3, );
-					ps.setInt(4, p.getGroupe());
-					ps.setFloat(5,p.getPrix());
-					rs = ps.executeQuery();
-					if(rs.next()){
-						System.out.println(rs.getString("nom_plat") +" exist !");
-						res = true;
-					}
-				} catch (SQLException e) {
-					System.out.println("Erreur Base.platExist "+e.getMessage());
-					e.printStackTrace();
+	public int getIdGroupe(String nomGroupe){
+		int res =-1;
+		String sql ="SELECT id_groupe FROM `t_groupe` WHERE `nom_groupe` = ?";
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		if(groupeExist(nomGroupe)){
+			try {
+				ps = connection.prepareStatement(sql);
+				ps.setString(1,nomGroupe);
+				System.out.println(nomGroupe);
+				rs = ps.executeQuery();
+				if(rs.next()){
+					res = rs.getInt("id_groupe");
 				}
-				try {if (ps != null) ps.close();} catch (Exception e) {}
-				try {if (rs != null) rs.close();} catch (Exception e) {}
+			} catch (SQLException e) {
+				System.out.println("Erreur Base.getIdGroupe "+e.getMessage());
+				e.printStackTrace();
 			}
+			try {if (ps != null) ps.close();} catch (Exception e) {}
+			try {if (rs != null) rs.close();} catch (Exception e) {}
 		}
+		
+		return res;
 	}
-*/
+	public Photo getPhoto(int idPhoto){
+		Photo res = null;
+		String sql = "SELECT img_photo FROM t_photo";
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		if(photoExist(idPhoto)){
+			res = new Photo();
+			try {
+				ps = connection.prepareStatement(sql);
+				rs = ps.executeQuery();
+				while(rs.next()){
+					Blob blob = rs.getBlob("img_photo");
+					int blobLength =(int) blob.length();
+					res.setImg(blob.getBytes(1, blobLength));
+					blob.free();
+				}
+			} catch (SQLException e) {
+				System.out.println("Erreur Base.getMenu "+e.getMessage());
+				e.printStackTrace();
+			}
+			try {if (ps != null) ps.close();} catch (Exception e) {}
+			try {if (rs != null) rs.close();} catch (Exception e) {}
+		}
+		
+		return res;
+	}
+	//Gestion des  entitées
+
+	public boolean createPlat(Plat p){
+		boolean res = false;
+		/*String req = "INSERT INTO `t_plat`(`nom_plat`, `desc_plat`, `img_plat`, `fk_id_grp`, `prix_plat`) VALUES (?,?,?,?,?)";
+		if(!platExist(p.getNom())){
+			PreparedStatement ps = null;
+			try {
+				ps = connection.prepareStatement(req);
+				ps.setString(1,p.getNom());
+				ps.setString(2,p.getDescription());
+				byte[] img = p.getImg();
+				ByteArrayInputStream bis = new ByteArrayInputStream(img);
+				ps.setBinaryStream(3, bis);
+				int idGrp = getIdGroupe(p.getGroupe());
+				if(idGrp != -1){
+					ps.setInt(4,idGrp);
+					ps.setFloat(5,p.getPrix());				
+					ps.execute();
+					res = true;
+				}
+			} catch (SQLException e) {
+				System.out.println("Erreur Base.platExist "+e.getMessage());
+				e.printStackTrace();
+			}
+			try {if (ps != null) ps.close();} catch (Exception e) {}
+		}*/
+		return res;
+	}
+
 	public boolean deletePlat(Plat p){
 		boolean res = false;
 		int idPlat;
@@ -362,10 +428,12 @@ public class Bdd {
 				psPlat.setString(1, p.getNom());
 				rsPlat = psPlat.executeQuery();
 				if(rsPlat.next()){
+					//deletePhoto(p.getIdPhoto());
 					idPlat = rsPlat.getInt("id_plat");
 					psDelete = connection.prepareStatement(reqDelete);
 					psDelete.setInt(1, idPlat);
 					res = psDelete.execute();
+					
 				}		
 			}catch(Exception e){
 				System.out.println("Erreur Base.deletePlat");
@@ -379,6 +447,41 @@ public class Bdd {
 		return res;
 	}
 	
+	public boolean createPhoto(Photo photo){
+		boolean res = false;
+		String req = "INSERT INTO `t_photo`(`img_photo`) VALUES (?)";
+		PreparedStatement ps = null;
+		try {
+			ps = connection.prepareStatement(req);
+			byte[] img = photo.getImg();
+			ByteArrayInputStream bis = new ByteArrayInputStream(img);
+			ps.setBinaryStream(1, bis);
+			res = ps.execute();
+		} catch (SQLException e) {
+			System.out.println("Erreur Base.createPhoto "+e.getMessage());
+			e.printStackTrace();
+		}
+		try {if (ps != null) ps.close();} catch (Exception e) {}
+		return res;
+	}
+/*	public boolean deletePhoto(int idPhoto){
+		boolean res = false;
+		if(photoExist(idPhoto)){
+			String reqDelete ="DELETE FROM `t_photo` WHERE id_photo = ?";
+			PreparedStatement psDelete = null;
+			try{
+				psDelete = connection.prepareStatement(reqDelete);
+				psDelete.setInt(1, idPhoto);
+				res = psDelete.execute();
+			}catch(Exception e){
+				System.out.println("Erreur Base.deletePlat");
+			}
+			try {if (psDelete != null) psDelete.close();} catch (Exception e) {}
+			return res;
+		}
+		return res;
+	}
+*/	
 	public boolean createGroupe(String nomGroupe){
 		boolean res = false;
 		String req = "INSERT INTO `t_groupe`(`nom_groupe`) VALUES (?)";

@@ -8,6 +8,7 @@ import annotation.Table;
 @Table(name="t_groupe")
 public class Groupe implements Serializable{
 	@NonVide(mess="Veuillez saisir un nom pour votre groupe")
+	int idGroupe;
 	String nom;
 	public Groupe(){}
 	public Groupe(String n){this.nom = n;}

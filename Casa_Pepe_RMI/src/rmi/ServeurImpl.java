@@ -9,12 +9,16 @@ import java.util.ArrayList;
 import bdd.Bdd;
 import bean.Groupe;
 import bean.Menu;
+import bean.Photo;
 import bean.Plat;
 
 public class ServeurImpl implements ServeurInterface{
 
 	Bdd base = new Bdd();
 	
+	public String test()throws RemoteException{
+		return "test";
+	}
 	//Ouverture et fermeture de la BDD
 	public boolean ouvrirBdd(){
 		if(base.ouvrir()){
@@ -56,8 +60,17 @@ public class ServeurImpl implements ServeurInterface{
 	public Groupe getGroupe(int idGroupe) throws RemoteException{
 		return base.getGroupe(idGroupe);
 	}
-	
+	public int getIdGroupe(String nomGroupe){
+		return base.getIdGroupe(nomGroupe);
+	}
+	public Photo getPhoto(int idPhoto) throws RemoteException{
+		return base.getPhoto(idPhoto);
+	}
 	//Gestion des entitées
+	public boolean createPlat(Plat p) throws RemoteException{
+		boolean res =  base.createPlat(p);
+		return res;
+	}
 	public boolean deletePlat(Plat p) throws RemoteException{
 		return base.deletePlat(p);
 	}
@@ -67,6 +80,9 @@ public class ServeurImpl implements ServeurInterface{
 	}
 	public boolean deleteGroupe(String nomGroupe) throws RemoteException{
 		return base.deleteGroupe(nomGroupe);
+	}
+	public boolean createPhoto(Photo photo) throws RemoteException {
+		return base.createPhoto(photo);
 	}
 	
 	
