@@ -7,6 +7,7 @@ import java.util.ArrayList;
 
 import bean.Groupe;
 import bean.Menu;
+import bean.Photo;
 import bean.Plat;
 import rmi.ServeurInterface;
 
@@ -54,10 +55,10 @@ public class Manager {
 		}
 		return res;
 	}
-	public Menu getMenu(String nom){
+	public Menu getMenu(int idMenu){
 		Menu res = null;
 		try {
-			res = serveur.getMenu(nom);
+			res = serveur.getMenu(idMenu);
 			return res;
 		} catch (RemoteException e) {
 			// TODO Auto-generated catch block
@@ -109,10 +110,19 @@ public class Manager {
 		}
 		return res;
 	}
-	public boolean deletePlat(String nomPlat){
+	public Photo getPhoto(int idPhoto){
+		Photo res = new Photo();
+		try{
+			res = serveur.getPhoto(idPhoto);
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+		return res;
+	}
+	public boolean deletePlat(int idPlat){
 		boolean res = false;
 		Plat p = new Plat();
-		p.setNom(nomPlat);
+		p.setId(idPlat);
 		try {
 			res = serveur.deletePlat(p);
 			return res;

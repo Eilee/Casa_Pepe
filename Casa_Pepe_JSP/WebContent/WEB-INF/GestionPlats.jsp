@@ -19,6 +19,7 @@
 	<div class="col-md-12 tableGestion tableIcone inputDeleteUpdate">
 		<table>
 			<tr>
+				<td style="text-align:center"><b>Numero du plat</b></td>
 				<td style="text-align:center"><b>Nom du plat</b></td>
 				<td style="text-align:center"><b>Description du plat</b></td>
 				<td style="text-align:center"><b>Type</b></td>
@@ -26,6 +27,7 @@
 			</tr>
 			<c:forEach items="${listPlats}" var="listPlat">
 		        <tr>
+		        	<td>${listPlat.getId()}</td>
 		            <td>${listPlat.getNom()}</td>
 		            <td>${listPlat.getDescription()}</td>
 		            <td>${listPlat.getGroupe()}</td>
@@ -38,7 +40,7 @@
 		            </td>
 					<td>
 						<form method="post" onsubmit="return confirm('Voulez-vous vraiment supprimer ce plats ?');">
-							<input name="delete" value="${listPlat.getNom()}" type="hidden"/>
+							<input name="delete" value="${listPlat.getId()}" type="hidden"/>
 							<input type="image" src="img/supprimer.png" border="0" alt="Submit"/>
 						</form>
 					</td>
