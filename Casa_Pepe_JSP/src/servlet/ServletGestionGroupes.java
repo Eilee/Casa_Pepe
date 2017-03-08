@@ -30,10 +30,14 @@ public class ServletGestionGroupes extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		System.out.println("doGet Gestion Groupes");
 		Manager manager = (Manager) request.getSession().getAttribute("Manager");
-		ArrayList<Groupe> listGroupes = manager.getAllGroupe();
-		request.setAttribute("listGroupes", listGroupes);
-		request.getServletContext().getRequestDispatcher("/WEB-INF/GestionGroupes.jsp").forward(request, response);
 		
+		if(manager==null){
+			response.sendRedirect("Accueil");
+		}else{
+			ArrayList<Groupe> listGroupes = manager.getAllGroupe();
+			request.setAttribute("listGroupes", listGroupes);
+			request.getServletContext().getRequestDispatcher("/WEB-INF/GestionGroupes.jsp").forward(request, response);
+		}
 	}
 
 	/**

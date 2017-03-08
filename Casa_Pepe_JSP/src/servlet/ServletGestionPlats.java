@@ -29,9 +29,14 @@ public class ServletGestionPlats extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		System.out.println("doGet Gestion Plats");
 		Manager manager = (Manager) request.getSession().getAttribute("Manager");
-		ArrayList<Plat> listPlats = manager.getAllPlat();
-		request.setAttribute("listPlats", listPlats);
-		request.getServletContext().getRequestDispatcher("/WEB-INF/GestionPlats.jsp").forward(request, response);
+		
+		if(manager==null){
+			response.sendRedirect("Accueil");
+		}else{
+			ArrayList<Plat> listPlats = manager.getAllPlat();
+			request.setAttribute("listPlats", listPlats);
+			request.getServletContext().getRequestDispatcher("/WEB-INF/GestionPlats.jsp").forward(request, response);
+		}
 	}
 
 	/**
@@ -40,9 +45,19 @@ public class ServletGestionPlats extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		System.out.println("doPost Gestion Plats");
 		Manager manager = (Manager) request.getSession().getAttribute("Manager");
-		String nomPlat = request.getParameter("delete");
-		System.out.println("Suppression du plats : "+nomPlat);
-		manager.deletePlat(nomPlat);
-		doGet(request,response);
+		String create = request.getParameter("create");
+		String update = request.getParameter("update");
+		String delete = request.getParameter("delete");
+		if(create!=null){
+			System.out.println("Creation d'un plat");
+			response.sendRedirect("Edition");
+		}else if(update!=null){
+			System.out.println("Modification du plat : "+update);
+			response.sendRedirect("Edition?idPlat="+update);
+		}else if(delete!=null){
+			System.out.println("Suppression du plat : "+delete);
+			manager.deletePlat(delete);
+			doGet(request,response);
+		}
 	}
 }

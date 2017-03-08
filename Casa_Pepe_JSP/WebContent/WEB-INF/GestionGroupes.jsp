@@ -13,7 +13,7 @@
 </div>
 <div class="row">
 	<div class="col-md-12 tableGestion tableIcone">
-		<table>
+		<table align="center">
 			<tr>
 				<td style="text-align:center"><b>Nom du groupe</b></td>
 			</tr>

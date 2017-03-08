@@ -10,6 +10,7 @@ import annotation.Table;
 @Table(name="t_plat")
 public class Plat implements Serializable{
 
+	int ident;
 	int imgMax = 800000;
 	String nom;
 	String description;
@@ -19,7 +20,8 @@ public class Plat implements Serializable{
 	String groupe;
 	
 	public Plat(){};
-	public Plat(String n,String desc,float p,String g,byte[] im){
+	public Plat(int id,String n,String desc,float p,String g,byte[] im){
+		this.ident = id;
 		this.nom = n;
 		this.description = desc;
 		this.groupe =g;
@@ -27,6 +29,12 @@ public class Plat implements Serializable{
 		this.prix = p;
 	}
 	
+	public int getId() {
+		return ident;
+	}
+	public void setId(int id) {
+		this.ident = id;
+	}
 	public String getNom() {
 		return nom;
 	}

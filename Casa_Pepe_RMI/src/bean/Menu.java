@@ -2,7 +2,6 @@ package bean;
 
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.HashMap;
 
 import annotation.NonVide;
 import annotation.Table;
@@ -11,20 +10,33 @@ import annotation.Table;
 public class Menu implements Serializable{
 
 	@NonVide(mess="Veuillez saisir un nom pour votre menu")
+	int ident;
 	String nom;
 	ArrayList<Plat> listPlat;
-	public Menu(String n){
+	
+	public Menu(int id,String n){
+		this.ident = id;
 		this.nom = n;
 		listPlat = new ArrayList<Plat>();
 	}
-	public Menu(String n,ArrayList<Plat> list){
+	public Menu(int id,String n,ArrayList<Plat> list){
+		this.ident = id;
 		this.nom = n;
 		this.listPlat = list;
 	}
-
-	public String getNom() {return nom;}
-
-	public void setNom(String nom) {this.nom = nom;}
+	
+	public int getId() {
+		return ident;
+		}
+	public void setId(int id) {
+		this.ident = id;
+	}
+	public String getNom() {
+		return nom;
+		}
+	public void setNom(String nom) {
+		this.nom = nom;
+	}
 	public ArrayList<Plat> getListPlat() {
 		return listPlat;
 	}
