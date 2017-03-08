@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import bean.Groupe;
 import bean.Plat;
 import manager.Manager;
 
@@ -34,11 +35,13 @@ public class ServletEdition extends HttpServlet {
 		
 		if(manager==null){
 			response.sendRedirect("Accueil");
-		}else{
+		}else if(idPlat!=null){
 			Plat p = manager.getPlat(Integer.parseInt(idPlat));
 			request.setAttribute("plat", p);
-			request.getServletContext().getRequestDispatcher("/WEB-INF/Edition.jsp").forward(request, response);
 		}
+		ArrayList<Groupe> grp = manager.getAllGroupe();
+		request.setAttribute("groupes", grp);
+		request.getServletContext().getRequestDispatcher("/WEB-INF/Edition.jsp").forward(request, response);
 	}
 
 	/**
