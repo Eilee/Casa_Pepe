@@ -69,7 +69,7 @@ public class ServletEdition extends HttpServlet {
 		String image = request.getParameter("image");
 		String id = request.getParameter("id");
 
-		if(nom!=null || description!=null || groupe!=null || prix!=null){
+		/*if(nom!=null || description!=null || groupe!=null || prix!=null){
 			Plat p = new Plat();
 			p.setId(Integer.parseInt(id));
 			p.setNom(nom);
@@ -77,7 +77,7 @@ public class ServletEdition extends HttpServlet {
 			p.setIdGroupe(Integer.parseInt(groupe));
 			p.setPrix(Float.parseFloat(prix));
 			manager.updatePlat(p);
-		}
+		}*/
 		response.sendRedirect("GestionPlats");
 		/*if(create!=null){
 			System.out.println("Creation d'un plats");

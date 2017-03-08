@@ -27,7 +27,7 @@
 			        	<tr>
 			        <%} %>
 			            <td>
-			            	<h4>${listPlat.getNom()}<i>&nbsp;(${listPlat.getGroupe()})</i></h4>
+			            	<h4>${listPlat.getNom()}<i></i></h4>
 			            	<img id="${listPlat.getNom()}" src="Image?id=${listPlat.idPhoto}"/>
 							<p>${listPlat.getDescription()}</p>
 						</td>

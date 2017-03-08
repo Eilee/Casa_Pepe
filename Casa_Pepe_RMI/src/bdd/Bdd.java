@@ -277,7 +277,7 @@ public class Bdd {
 				res.setId(rs.getInt("id_plat"));
 				res.setNom(rs.getString("nom_plat"));
 				res.setDescription(rs.getString("desc_plat"));
-				res.setGroupe(rs.getInt("fk_id_groupe"));
+				res.setGroupe(rs.getInt("fk_id_grp"));
 				res.setPrix(rs.getFloat("prix_plat"));
 				res.setIdPhoto(rs.getInt("fk_img_plat"));
 				return res;
@@ -389,31 +389,20 @@ public class Bdd {
 	}
 	public boolean deletePlat(Plat p){
 		boolean res = false;
-		int idPlat;
-		String reqPlat = "SELECT id_plat FROM `t_plat` WHERE `nom_plat` = ?";
 		String reqDelete ="DELETE FROM `t_plat` WHERE id_plat = ?";
 		PreparedStatement psPlat = null;
-		PreparedStatement psDelete = null;
-		ResultSet rsPlat = null;
 		if(platExist(p.getId())){
+			System.out.println("Le plat existe");
 			try{
-				psPlat = connection.prepareStatement(reqPlat);
-				psPlat.setString(1, p.getNom());
-				rsPlat = psPlat.executeQuery();
-				if(rsPlat.next()){
-					//deletePhoto(p.getIdPhoto());
-					idPlat = rsPlat.getInt("id_plat");
-					psDelete = connection.prepareStatement(reqDelete);
-					psDelete.setInt(1, idPlat);
-					psDelete.execute();
-					res = true;
-				}		
+				System.out.println("try");
+				psPlat = connection.prepareStatement(reqDelete);
+				psPlat.setInt(1, p.getId());
+				psPlat.execute();
+				res = true;
 			}catch(Exception e){
 				System.out.println("Erreur Base.deletePlat");
 			}
 			try {if (psPlat != null) psPlat.close();} catch (Exception e) {}
-			try {if (rsPlat != null) rsPlat.close();} catch (Exception e) {}
-			try {if (psDelete != null) psDelete.close();} catch (Exception e) {}
 			return res;
 		}
 		

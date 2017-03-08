@@ -130,10 +130,11 @@ public class Manager {
 	public boolean deletePlat(int idPlat){
 		boolean res = false;
 		Plat p = new Plat();
+		System.out.println("id a supprimer :"+idPlat);
 		p.setId(idPlat);
 		try {
-			res = serveur.deletePlat(p);
-			return res;
+			serveur.deletePlat(p);
+			return res = true;
 		} catch (RemoteException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

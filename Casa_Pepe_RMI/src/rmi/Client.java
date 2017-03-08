@@ -30,6 +30,11 @@ public class Client {
 		}
 		
 		try{
+			Plat p = new Plat();
+			p.setId(26);
+			if(serveur.deletePlat(p)){
+				System.out.println("OK");
+			}else{System.out.println("KO");}
 			/*Plat p = new Plat(25, "cookies", "cookies au chocolat et a la nougatine", 2, 4, 1);
 			if(serveur.createPlat(p)){
 				System.out.println("Creation plat - OK");
