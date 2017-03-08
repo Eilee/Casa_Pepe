@@ -56,7 +56,7 @@ public class ServletGestionPlats extends HttpServlet {
 			response.sendRedirect("Edition?idPlat="+update);
 		}else if(delete!=null){
 			System.out.println("Suppression du plat : "+delete);
-			manager.deletePlat(delete);
+			manager.deletePlat(Integer.parseUnsignedInt(delete));
 			doGet(request,response);
 		}
 	}

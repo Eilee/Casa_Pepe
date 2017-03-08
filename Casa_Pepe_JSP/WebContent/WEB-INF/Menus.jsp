@@ -24,7 +24,7 @@
 			        <%} %>
 			            <td>
 			            	<h4>${listPlat.getNom()}<i>&nbsp;(${listPlat.getGroupe()})</i></h4>
-			            	<img id="${listPlat.getNom()}" src="data:image/jpg;base64,${listPlat.getImgValue()}"/>
+			            	<img id="${listPlat.getNom()}" src="Image?id=${listPlat.idPhoto}"/>
 							<p>${listPlat.getDescription()}</p>
 						</td>
 					<%if((i%2)!=0){%>
