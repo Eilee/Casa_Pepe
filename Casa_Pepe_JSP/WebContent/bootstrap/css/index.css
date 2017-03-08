@@ -71,13 +71,14 @@ li a:hover, li a.active{
 	margin-bottom:20px
 }
 
-.inputDeleteUpdate input {
-	margin-bottom:-20px;
-}
-
 .tableEdition td{ 
 	min-width: 200px;
 	padding: 15px;
+}
+
+.tableEdition img{
+	width:200px;
+	height:200px;
 }
 
 .inputEditer{
@@ -88,3 +89,4 @@ li a:hover, li a.active{
 	height:40px;
 	margin-top:20px;
 }
+

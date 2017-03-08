@@ -16,10 +16,9 @@
 		<input name="create" value="true" type="hidden"/>
 		<input type="image" src="img/creer.jpg" border="0" alt="Submit" class="inputCreate"/>
 	</form>
-	<div class="col-md-12 tableGestion tableIcone inputDeleteUpdate">
+	<div class="col-md-12 tableGestion tableIcone">
 		<table>
 			<tr>
-				<td style="text-align:center"><b>Numero du plat</b></td>
 				<td style="text-align:center"><b>Nom du plat</b></td>
 				<td style="text-align:center"><b>Description du plat</b></td>
 				<td style="text-align:center"><b>Type</b></td>
@@ -27,7 +26,6 @@
 			</tr>
 			<c:forEach items="${listPlats}" var="listPlat">
 		        <tr>
-		        	<td>${listPlat.getId()}</td>
 		            <td>${listPlat.getNom()}</td>
 		            <td>${listPlat.getDescription()}</td>
 		            <td>${listPlat.getGroupe()}</td>

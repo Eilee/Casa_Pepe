@@ -132,4 +132,13 @@ public class Manager {
 		}
 		return res;
 	}
+	public boolean updatePlat(Plat p){
+		boolean res = false;
+		try{
+			res = serveur.updatePlat(p);
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+		return res;
+	}
 }

@@ -1,13 +1,23 @@
 package servlet;
 
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import org.apache.tomcat.util.http.fileupload.FileItem;
+import org.apache.tomcat.util.http.fileupload.FileUploadException;
+import org.apache.tomcat.util.http.fileupload.RequestContext;
+import org.apache.tomcat.util.http.fileupload.disk.DiskFileItemFactory;
+import org.apache.tomcat.util.http.fileupload.servlet.ServletFileUpload;
+import org.apache.tomcat.util.http.fileupload.*;
 
 import bean.Groupe;
 import bean.Plat;
@@ -35,13 +45,15 @@ public class ServletEdition extends HttpServlet {
 		
 		if(manager==null){
 			response.sendRedirect("Accueil");
-		}else if(idPlat!=null){
-			Plat p = manager.getPlat(Integer.parseInt(idPlat));
-			request.setAttribute("plat", p);
+		}else{
+			ArrayList<Groupe> grp = manager.getAllGroupe();
+			request.setAttribute("groupes", grp);
+			if(idPlat!=null){
+				Plat p = manager.getPlat(Integer.parseInt(idPlat));
+				request.setAttribute("plat", p);
+			}
+			request.getServletContext().getRequestDispatcher("/WEB-INF/Edition.jsp").forward(request, response);
 		}
-		ArrayList<Groupe> grp = manager.getAllGroupe();
-		request.setAttribute("groupes", grp);
-		request.getServletContext().getRequestDispatcher("/WEB-INF/Edition.jsp").forward(request, response);
 	}
 
 	/**
@@ -49,11 +61,25 @@ public class ServletEdition extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		System.out.println("doPost Edition");
-		/*Manager manager = (Manager) request.getSession().getAttribute("Manager");
-		String create = request.getParameter("create");
-		String update = request.getParameter("update");
-		String delete = request.getParameter("delete");
-		if(create!=null){
+		Manager manager = (Manager) request.getSession().getAttribute("Manager");
+		String nom = request.getParameter("nom");
+		String description = request.getParameter("description");
+		String groupe = request.getParameter("groupe");
+		String prix = request.getParameter("prix");
+		String image = request.getParameter("image");
+		String id = request.getParameter("id");
+
+		if(nom!=null || description!=null || groupe!=null || prix!=null){
+			Plat p = new Plat();
+			p.setId(Integer.parseInt(id));
+			p.setNom(nom);
+			p.setDescription(description);
+			p.setIdGroupe(Integer.parseInt(groupe));
+			p.setPrix(Float.parseFloat(prix));
+			manager.updatePlat(p);
+		}
+		response.sendRedirect("GestionPlats");
+		/*if(create!=null){
 			System.out.println("Creation d'un plats");
 			request.setAttribute("nomPlats", update);
 			response.sendRedirect("Edition");

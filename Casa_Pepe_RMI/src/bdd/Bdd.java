@@ -277,6 +277,7 @@ public class Bdd {
 				res.setId(rs.getInt("id_plat"));
 				res.setNom(rs.getString("nom_plat"));
 				res.setDescription(rs.getString("desc_plat"));
+				res.setIdGroupe(rs.getInt("fk_id_grp"));
 				res.setGroupe(rs.getString("nom_groupe"));
 				res.setPrix(rs.getFloat("prix_plat"));
 				res.setIdPhoto(rs.getInt("fk_img_plat"));
@@ -493,6 +494,27 @@ public class Bdd {
 				System.out.println("Erreur Base.CreateGroupe");
 			}
 		}
+		return res;
+	}
+	public boolean updatePlat(Plat p){
+		boolean res = false;
+		String req = "UPDATE `t_plat` SET `nom_plat`= ? , `desc_plat`= ? , `fk_id_grp`= ? , `prix_plat`= ? WHERE `t_plat`.`id_plat` = ?";
+		if(platExist(p.getId())){
+			PreparedStatement ps = null;
+			try{
+				ps = connection.prepareStatement(req);
+				ps.setString(1,p.getNom());
+				ps.setString(2,p.getDescription());
+				ps.setInt(3,p.getIdGroupe());
+				ps.setFloat(4,p.getPrix());
+				ps.setInt(5,p.getId());
+				ps.execute();
+				res = true;
+			}catch(Exception e){
+				System.out.println("Erreur Base.UpdatePlat");
+			}
+		}
+		
 		return res;
 	}
 	

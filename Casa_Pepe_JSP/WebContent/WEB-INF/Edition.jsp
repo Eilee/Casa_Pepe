@@ -1,3 +1,4 @@
+<%@ page import="bean.Groupe,bean.Plat" %>
 <%@include file="Header.jsp" %>
 <div class="row">
 	<div class="col-md-12">
@@ -28,8 +29,13 @@
 					<td>
 						 <div class="form-group">
 						  <select class="form-control" name="groupe">
+						  	<option></option>
 						  	<c:forEach items="${groupes}" var="groupe">
-						    	<option>${groupe.getNom()}</option>
+						  		<option value="${groupe.getId()}" 
+							  		<c:if test="${groupe.getId()==plat.getIdGroupe()}">
+							    		selected
+							    	</c:if>
+						    	>${groupe.getNom()}</option>
 						    </c:forEach>
 						  </select>
 						</div>
@@ -39,11 +45,18 @@
 					<td>Prix du plat</td>
 					<td><input type="number" name="prix" value="${plat.getPrix()}"/></td>
 				</tr>
+				<c:if test="${plat!=null}">
+					<tr>
+						<td></td>
+			    		<td><img id="${plat.getNom()}" src="Image?id=${plat.idPhoto}" /></td>
+			    	</tr>
+			    </c:if>
 				<tr>
 					<td>Photo du plat</td>
-					<td><input type="file" name="photo"/><p style="text-align:center;">(tailleMax = 100Ko)</p></td>
+					<td><input type="file" name="image"/><p style="text-align:center;">(tailleMax = 100Ko)</p></td>
 				</tr>
 			</table>
+			<input name="id" value="${plat.getId()}" type="hidden"/>
 			<input type="image" src="img/editer.jpg" border="0" alt="Submit" class="inputEditer"/>
 		</form>
 	</div>
