@@ -203,7 +203,7 @@ public class Bdd {
 				rs = ps.executeQuery();
 				//Si le menu existe en BDD on crée un menu avec ce nom
 				if(rs.next()){
-					res = new Menu(rs.getString("nom_menu"));
+					res = new Menu(rs.getInt("id_menu"),rs.getString("nom_menu"));
 					
 					//Puis on va charger la liste des plat qu'il contient
 					ArrayList<Plat> list = this.getMenuPlat(rs.getInt("id_menu"));
@@ -274,6 +274,7 @@ public class Bdd {
 			//Si le menu existe en BDD on crée un menu avec ce nom
 			if(rs.next()){
 				res = new Plat();
+				res.setId(rs.getInt("id_plat"));
 				res.setNom(rs.getString("nom_plat"));
 				res.setDescription(rs.getString("desc_plat"));
 				res.setGroupe(rs.getString("nom_groupe"));

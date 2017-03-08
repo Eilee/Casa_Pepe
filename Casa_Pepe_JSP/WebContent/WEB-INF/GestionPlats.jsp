@@ -1,8 +1,3 @@
-<script>
-function afficher(){
-	alert("Vous venez de cliquer sur le bouton!")
-}
-</script>
 <%@include file="Header.jsp" %>
 <div class="row">
 	<div class="col-md-12">
@@ -17,8 +12,11 @@ function afficher(){
 	</div>
 </div>
 <div class="row">
-	<form method="post"><a href="Creation"><img src="img/creer.jpg" style="float:right;	width:160px;height:40px;"></a></input>
-	<div class="col-md-12 tableGestion tableIcone">
+	<form method="post">
+		<input name="create" value="true" type="hidden"/>
+		<input type="image" src="img/creer.jpg" border="0" alt="Submit" class="inputCreate"/>
+	</form>
+	<div class="col-md-12 tableGestion tableIcone inputDeleteUpdate">
 		<table>
 			<tr>
 				<td style="text-align:center"><b>Nom du plat</b></td>
@@ -32,8 +30,18 @@ function afficher(){
 		            <td>${listPlat.getDescription()}</td>
 		            <td>${listPlat.getGroupe()}</td>
 		            <td>${listPlat.getPrix()}</td>
-		            <td><a href="Modification"><img src="img/modifier.png"/></a></td>
-					<td><form method="post" onsubmit="return confirm('Voulez-vous vraiment supprimer ce plats ?');"><input name="delete" value="${listPlat.getNom()}" type="hidden"/><input type="image" src="img/supprimer.png" border="0" alt="Submit" /></input></form></td>
+		            <td>
+		            	<form method="post">
+							<input name="update" value="${listPlat.getId()}" type="hidden"/>
+							<input type="image" src="img/modifier.png" border="0" alt="Submit"/>
+						</form>
+		            </td>
+					<td>
+						<form method="post" onsubmit="return confirm('Voulez-vous vraiment supprimer ce plats ?');">
+							<input name="delete" value="${listPlat.getNom()}" type="hidden"/>
+							<input type="image" src="img/supprimer.png" border="0" alt="Submit"/>
+						</form>
+					</td>
 		        </tr>
 		    </c:forEach>
 		</table>
