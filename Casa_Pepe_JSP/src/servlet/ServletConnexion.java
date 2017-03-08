@@ -28,6 +28,11 @@ private static final long serialVersionUID = 1L;
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		//Simple chargement de la page , aucun traitement
 		System.out.println("doGet Connexion");
+Manager manager = (Manager) request.getSession().getAttribute("Manager");
+		
+		if(manager==null){
+			response.sendRedirect("Accueil");
+		}
 		request.getServletContext().getRequestDispatcher("/WEB-INF/Connexion.jsp").forward(request, response);
 	}
 

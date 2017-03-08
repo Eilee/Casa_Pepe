@@ -4,14 +4,20 @@
 		<ul>
 		  	<li><a class="active" href="Accueil">Accueil</a></li>
 		  	<li><a href="Menus">Menus</a></li>
-		  	<li><a href="GestionPlats">Plats</a></li>
-		  	<li><a href="GestionGroupes">Groupes</a></li>
-		  	<li style="float:right;"><a href="Connexion">Connexion</a></li>
+		  	<% if(Manager.getIsConnect()){ %>
+		  		<li><a href="GestionPlats">Plats</a></li>
+		  		<li><a href="GestionGroupes">Groupes</a></li>
+		  	
+		  	<li style="float:right;"><a href="Deconnexion">Deconnexion</a></li>
+		  	<%}else{%>
+		  		<li style="float:right;"><a href="Connexion">Connexion</a></li>
+		  	<%} %>
 		</ul>
 		<br/>
 	</div>
 </div>
 <div class="row">
+
 	<div class="col-md-12 accueilImg">
 		<img src="img/restaurant.jpg"/>
 		<br/>
