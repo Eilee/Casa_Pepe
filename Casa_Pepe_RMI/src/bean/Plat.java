@@ -64,5 +64,10 @@ public class Plat implements Serializable{
 	public void setIdPhoto(int id) {
 		this.idPhoto = id;
 	}
+	@Override
+	public String toString() {
+		return "Plat [ident=" + ident + ", nom=" + nom + ", description=" + description + ", prix=" + prix
+				+ ", idPhoto=" + idPhoto + ", groupe=" + groupe + "]";
+	}
 	
 }

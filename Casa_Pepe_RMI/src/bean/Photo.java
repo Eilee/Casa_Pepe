@@ -9,6 +9,7 @@ import org.apache.tomcat.util.codec.binary.Base64;
 
 @Table(name="t_photo")
 public class Photo implements Serializable{
+	int idPhoto;
 	byte[] img;
 	String imgValue;
 	
@@ -32,5 +33,17 @@ public class Photo implements Serializable{
 	@Override
 	public String toString() {
 		return "Photo [img=" + Arrays.toString(img) + ", imgValue=" + imgValue + "]";
+	}
+	public int getIdPhoto() {
+		return idPhoto;
+	}
+	public void setIdPhoto(int idPhoto) {
+		this.idPhoto = idPhoto;
+	}
+	public String getImgValue() {
+		return imgValue;
+	}
+	public void setImgValue(String imgValue) {
+		this.imgValue = imgValue;
 	}
 }

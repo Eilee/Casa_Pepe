@@ -82,17 +82,17 @@ public class Bdd {
 		
 		return res;
 	}
-	private boolean menuExist(String n){
+	private boolean menuExist(int idMenu){
 		boolean res = false;
-		String sql ="SELECT nom_menu FROM `t_menu` WHERE `nom_menu` = ?";
+		String sql ="SELECT * FROM `t_menu` WHERE `id_menu` = ?";
 		PreparedStatement ps = null;
 		ResultSet rs = null;
 		try {
 			ps = connection.prepareStatement(sql);
-			ps.setString(1,n);
+			ps.setInt(1,idMenu);
 			rs = ps.executeQuery();
 			if(rs.next()){
-				System.out.println(rs.getString("nom_menu") +" exist !");
+				System.out.println(rs.getInt("id_menu")+ " - "+rs.getString("nom_menu") +" exist !");
 				res = true;
 			}
 		} catch (SQLException e) {
@@ -103,14 +103,14 @@ public class Bdd {
 		try {if (rs != null) rs.close();} catch (Exception e) {}
 		return res;
 	}
-	public boolean platExist(String nom){
+	public boolean platExist(int idPlat){
 		boolean res = false;
-		String sql ="SELECT nom_plat FROM `t_plat` WHERE `nom_plat` = ?";
+		String sql ="SELECT * FROM `t_plat` WHERE `id_plat` = ?";
 		PreparedStatement ps = null;
 		ResultSet rs = null;
 		try {
 			ps = connection.prepareStatement(sql);
-			ps.setString(1,nom);
+			ps.setInt(1,idPlat);
 			rs = ps.executeQuery();
 			if(rs.next()){
 				System.out.println(rs.getString("nom_plat") +" exist !");
@@ -124,14 +124,14 @@ public class Bdd {
 		try {if (rs != null) rs.close();} catch (Exception e) {}
 		return res;
 	}
-	public boolean groupeExist(String nom){
+	public boolean groupeExist(int idGroupe){
 		boolean res = false;
-		String sql ="SELECT nom_groupe FROM `t_groupe` WHERE `nom_groupe` = ?";
+		String sql ="SELECT * FROM `t_groupe` WHERE `id_groupe` = ?";
 		PreparedStatement ps = null;
 		ResultSet rs = null;
 		try {
 			ps = connection.prepareStatement(sql);
-			ps.setString(1,nom);
+			ps.setInt(1,idGroupe);
 			rs = ps.executeQuery();
 			if(rs.next()){
 				System.out.println(rs.getString("nom_groupe") +" exist !");
@@ -170,7 +170,7 @@ public class Bdd {
 	//Accesseur
 	public ArrayList<Menu> getAllMenu(){
 		ArrayList<Menu> res = new ArrayList<Menu>();
-		String sql = "SELECT nom_menu FROM t_menu";
+		String sql = "SELECT * FROM t_menu";
 		PreparedStatement ps = null;
 		ResultSet rs = null;
 		
@@ -178,28 +178,28 @@ public class Bdd {
 			ps = connection.prepareStatement(sql);
 			rs = ps.executeQuery();
 			while(rs.next()){
-				String nomMenu = rs.getString("nom_menu");
-				System.out.println(nomMenu);
-				res.add(this.getMenu(nomMenu));
+				int idMenu = rs.getInt("id_menu");
+				System.out.println(idMenu);
+				res.add(this.getMenu(idMenu));
 			}
 		} catch (SQLException e) {
-			System.out.println("Erreur Base.getMenu "+e.getMessage());
+			System.out.println("Erreur Base.AllgetMenu "+e.getMessage());
 			e.printStackTrace();
 		}
 		try {if (ps != null) ps.close();} catch (Exception e) {}
 		try {if (rs != null) rs.close();} catch (Exception e) {}
 		return res;
 	}
-	public Menu getMenu(String nom){
+	public Menu getMenu(int idMenu){
 		Menu res = null;
-		if(menuExist(nom)){
-			String sql ="SELECT * FROM `t_menu` WHERE `nom_menu` = ?";
+		if(menuExist(idMenu)){
+			String sql ="SELECT * FROM `t_menu` WHERE `id_menu` = ?";
 			PreparedStatement ps = null;
 			ResultSet rs = null;
 			
 			try {
 				ps = connection.prepareStatement(sql);
-				ps.setString(1,nom);
+				ps.setInt(1,idMenu);
 				rs = ps.executeQuery();
 				//Si le menu existe en BDD on crée un menu avec ce nom
 				if(rs.next()){
@@ -323,6 +323,7 @@ public class Bdd {
 			//Si le groupe existe en BDD on crée un groupe avec ce nom
 			if(rs.next()){
 				res = new Groupe();
+				res.setId(rs.getInt("id_groupe"));
 				res.setNom(rs.getString("nom_groupe"));
 				System.out.println(res.toString());
 				return res;
@@ -335,33 +336,10 @@ public class Bdd {
 		try {if (rs != null) rs.close();} catch (Exception e) {}
 		return res;
 	}
-	public int getIdGroupe(String nomGroupe){
-		int res =-1;
-		String sql ="SELECT id_groupe FROM `t_groupe` WHERE `nom_groupe` = ?";
-		PreparedStatement ps = null;
-		ResultSet rs = null;
-		if(groupeExist(nomGroupe)){
-			try {
-				ps = connection.prepareStatement(sql);
-				ps.setString(1,nomGroupe);
-				System.out.println(nomGroupe);
-				rs = ps.executeQuery();
-				if(rs.next()){
-					res = rs.getInt("id_groupe");
-				}
-			} catch (SQLException e) {
-				System.out.println("Erreur Base.getIdGroupe "+e.getMessage());
-				e.printStackTrace();
-			}
-			try {if (ps != null) ps.close();} catch (Exception e) {}
-			try {if (rs != null) rs.close();} catch (Exception e) {}
-		}
-		
-		return res;
-	}
+
 	public Photo getPhoto(int idPhoto){
 		Photo res = null;
-		String sql = "SELECT img_photo FROM t_photo";
+		String sql = "SELECT * FROM t_photo";
 		PreparedStatement ps = null;
 		ResultSet rs = null;
 		if(photoExist(idPhoto)){
@@ -370,6 +348,7 @@ public class Bdd {
 				ps = connection.prepareStatement(sql);
 				rs = ps.executeQuery();
 				while(rs.next()){
+					res.setIdPhoto(rs.getInt("id_photo"));
 					Blob blob = rs.getBlob("img_photo");
 					int blobLength =(int) blob.length();
 					res.setImg(blob.getBytes(1, blobLength));
@@ -423,7 +402,7 @@ public class Bdd {
 		PreparedStatement psPlat = null;
 		PreparedStatement psDelete = null;
 		ResultSet rsPlat = null;
-		if(platExist(p.getNom())){
+		if(platExist(p.getId())){
 			try{
 				psPlat = connection.prepareStatement(reqPlat);
 				psPlat.setString(1, p.getNom());
@@ -483,15 +462,15 @@ public class Bdd {
 		return res;
 	}
 */	
-	public boolean createGroupe(String nomGroupe){
+	public boolean createGroupe(Groupe groupe){
 		boolean res = false;
 		String req = "INSERT INTO `t_groupe`(`nom_groupe`) VALUES (?)";
-		if(!groupeExist(nomGroupe)){
+		if(!groupeExist(groupe.getId())){
 			PreparedStatement ps = null;
 			ResultSet rs = null;
 			try{
 				ps = connection.prepareStatement(req);
-				ps.setString(1, nomGroupe);
+				ps.setString(1, groupe.getNom());
 				ps.execute();
 				res = true;
 			}catch(Exception e){
@@ -500,14 +479,14 @@ public class Bdd {
 		}
 		return res;
 	}
-	public boolean deleteGroupe(String nomGroupe){
+	public boolean deleteGroupe(int idGroupe){
 		boolean res = false;
-		String req = "DELETE FROM `t_groupe` WHERE nom_groupe = ?";
-		if(groupeExist(nomGroupe)){
+		String req = "DELETE FROM `t_groupe` WHERE id_groupe = ?";
+		if(groupeExist(idGroupe)){
 			PreparedStatement ps = null;
 			try{
 				ps = connection.prepareStatement(req);
-				ps.setString(1, nomGroupe);
+				ps.setInt(1, idGroupe);
 				ps.execute();
 				res = true;
 			}catch(Exception e){

@@ -42,8 +42,8 @@ public class ServeurImpl implements ServeurInterface{
 	public ArrayList<Menu> getAllMenu() throws RemoteException{
 		return base.getAllMenu();
 	}
-	public Menu getMenu(String nom) throws RemoteException{
-		return base.getMenu(nom);
+	public Menu getMenu(int idMenu) throws RemoteException{
+		return base.getMenu(idMenu);
 	}
 	public ArrayList<Plat> getMenuPlat(int numMenu) throws RemoteException{
 		return base.getMenuPlat(numMenu);
@@ -60,9 +60,7 @@ public class ServeurImpl implements ServeurInterface{
 	public Groupe getGroupe(int idGroupe) throws RemoteException{
 		return base.getGroupe(idGroupe);
 	}
-	public int getIdGroupe(String nomGroupe){
-		return base.getIdGroupe(nomGroupe);
-	}
+
 	public Photo getPhoto(int idPhoto) throws RemoteException{
 		return base.getPhoto(idPhoto);
 	}
@@ -75,11 +73,11 @@ public class ServeurImpl implements ServeurInterface{
 		return base.deletePlat(p);
 	}
 
-	public boolean createGroupe(String nomGroupe) throws RemoteException{
-		return base.createGroupe(nomGroupe);
+	public boolean createGroupe(Groupe groupe) throws RemoteException{
+		return base.createGroupe(groupe);
 	}
-	public boolean deleteGroupe(String nomGroupe) throws RemoteException{
-		return base.deleteGroupe(nomGroupe);
+	public boolean deleteGroupe(int idGroupe) throws RemoteException{
+		return base.deleteGroupe(idGroupe);
 	}
 	public boolean createPhoto(Photo photo) throws RemoteException {
 		return base.createPhoto(photo);
