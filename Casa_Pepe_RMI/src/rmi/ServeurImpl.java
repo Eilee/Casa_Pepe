@@ -9,12 +9,16 @@ import java.util.ArrayList;
 import bdd.Bdd;
 import bean.Groupe;
 import bean.Menu;
+import bean.Photo;
 import bean.Plat;
 
 public class ServeurImpl implements ServeurInterface{
 
 	Bdd base = new Bdd();
 	
+	public String test()throws RemoteException{
+		return "test";
+	}
 	//Ouverture et fermeture de la BDD
 	public boolean ouvrirBdd(){
 		if(base.ouvrir()){
@@ -38,8 +42,8 @@ public class ServeurImpl implements ServeurInterface{
 	public ArrayList<Menu> getAllMenu() throws RemoteException{
 		return base.getAllMenu();
 	}
-	public Menu getMenu(String nom) throws RemoteException{
-		return base.getMenu(nom);
+	public Menu getMenu(int idMenu) throws RemoteException{
+		return base.getMenu(idMenu);
 	}
 	public ArrayList<Plat> getMenuPlat(int numMenu) throws RemoteException{
 		return base.getMenuPlat(numMenu);
@@ -56,17 +60,27 @@ public class ServeurImpl implements ServeurInterface{
 	public Groupe getGroupe(int idGroupe) throws RemoteException{
 		return base.getGroupe(idGroupe);
 	}
-	
+
+	public Photo getPhoto(int idPhoto) throws RemoteException{
+		return base.getPhoto(idPhoto);
+	}
 	//Gestion des entitées
+	public boolean createPlat(Plat p) throws RemoteException{
+		boolean res =  base.createPlat(p);
+		return res;
+	}
 	public boolean deletePlat(Plat p) throws RemoteException{
 		return base.deletePlat(p);
 	}
 
-	public boolean createGroupe(String nomGroupe) throws RemoteException{
-		return base.createGroupe(nomGroupe);
+	public boolean createGroupe(Groupe groupe) throws RemoteException{
+		return base.createGroupe(groupe);
 	}
-	public boolean deleteGroupe(String nomGroupe) throws RemoteException{
-		return base.deleteGroupe(nomGroupe);
+	public boolean deleteGroupe(int idGroupe) throws RemoteException{
+		return base.deleteGroupe(idGroupe);
+	}
+	public boolean createPhoto(Photo photo) throws RemoteException {
+		return base.createPhoto(photo);
 	}
 	
 	

@@ -11,12 +11,10 @@ import annotation.Table;
 public class Plat implements Serializable{
 
 	int ident;
-	int imgMax = 800000;
 	String nom;
 	String description;
 	float prix;
-	byte[] img = new byte[imgMax];
-	String imgValue;
+	int idPhoto;
 	String groupe;
 	
 	public Plat(){};
@@ -25,7 +23,7 @@ public class Plat implements Serializable{
 		this.nom = n;
 		this.description = desc;
 		this.groupe =g;
-		this.img = im;
+		this.idPhoto = idPhoto;
 		this.prix = p;
 	}
 	
@@ -53,38 +51,23 @@ public class Plat implements Serializable{
 	public void setPrix(float prix) {
 		this.prix = prix;
 	}
-	public byte[] getImg() {
-		return img;
+	public int getIdPhoto() {
+		return this.idPhoto;
 	}
-	public void setImg(byte[] img) {
-		byte[] encodeBase64 = Base64.encodeBase64(img);
-         try {
-			this.imgValue = new String(encodeBase64, "UTF-8");
-		} catch (UnsupportedEncodingException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-	}
-	public String getImgValue() {
-		return this.imgValue;
-	}
+
 	public String getGroupe() {
 		return groupe;
 	}
 	public void setGroupe(String groupe) {
 		this.groupe = groupe;
 	}
+	public void setIdPhoto(int id) {
+		this.idPhoto = id;
+	}
 	@Override
 	public String toString() {
-		return "Plat [nom=" + nom + ", description=" + description + ", prix=" + prix + ", groupe=" + groupe + ",img = {"+this.toStringImg()+"}]";
-	}
-	public int getImgMax(){return this.imgMax;}
-	public String toStringImg(){
-		String res = "";
-		for(int i = 0 ; i < img.length;i++){
-			res += img[i];
-		}
-		return res;
+		return "Plat [ident=" + ident + ", nom=" + nom + ", description=" + description + ", prix=" + prix
+				+ ", idPhoto=" + idPhoto + ", groupe=" + groupe + "]";
 	}
 	
 }

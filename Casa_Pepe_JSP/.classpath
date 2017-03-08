@@ -13,8 +13,8 @@
 	</classpathentry>
 	<classpathentry kind="con" path="org.eclipse.jst.j2ee.internal.web.container"/>
 	<classpathentry kind="con" path="org.eclipse.jst.j2ee.internal.module.container"/>
-	<classpathentry kind="lib" path="C:/Users/odicfabi/Documents/javax.servlet.jsp.jstl-api-1.2.1.jar"/>
-	<classpathentry kind="lib" path="C:/Users/odicfabi/Documents/jstl-1.2.jar"/>
-	<classpathentry kind="lib" path="C:/Users/odicfabi/Documents/rmi.jar"/>
+	<classpathentry kind="lib" path="C:/Users/valletqu/Downloads/RMI.jar"/>
+	<classpathentry kind="lib" path="H:/Documents/SOR/jstl-1.2.jar"/>
+	<classpathentry kind="lib" path="H:/Documents/SOR/javax.servlet.jsp.jstl-api-1.2.1.jar"/>
 	<classpathentry kind="output" path="build/classes"/>
 </classpath>
