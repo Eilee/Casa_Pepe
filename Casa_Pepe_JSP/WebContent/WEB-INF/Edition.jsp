@@ -14,14 +14,14 @@
 <div class="row">
 	<div class="col-md-12 tableEdition">
 		<form method="post">
-			<table>
+			<table align="center">
 				<tr>
 					<td>Nom du plat</td>
-					<td><input type="text" name="nom"/></td>
+					<td><input type="text" name="nom" value="${plat.getNom()}"/></td>
 				</tr>
 				<tr>
 					<td>Description du plat</td>
-					<td><textarea class="form-control" rows="5" name="description"></textarea></td>
+					<td><textarea class="form-control" rows="5" name="description">${plat.getDescription()}</textarea></td>
 				</tr>
 				<tr>
 					<td>Type du plat</td>
@@ -37,14 +37,14 @@
 				</tr>
 				<tr>
 					<td>Prix du plat</td>
-					<td><input type="integer" name="nom"/></td>
+					<td><input type="number" name="prix" value="${plat.getPrix()}"/></td>
 				</tr>
 				<tr>
 					<td>Photo du plat</td>
-					<td><input type="file" name="photo"/>(tailleMax = 100Ko)</td>
+					<td><input type="file" name="photo"/><p style="text-align:center;">(tailleMax = 100Ko)</p></td>
 				</tr>
 			</table>
-			<input type="submit" value="Editer" style="float:right;"/>
+			<input type="image" src="img/editer.jpg" border="0" alt="Submit" class="inputEditer"/>
 		</form>
 	</div>
 </div>

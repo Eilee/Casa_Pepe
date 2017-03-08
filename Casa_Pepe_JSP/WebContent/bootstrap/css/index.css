@@ -75,6 +75,16 @@ li a:hover, li a.active{
 	margin-bottom:-20px;
 }
 
-.tableEdition {
-	
+.tableEdition td{ 
+	min-width: 200px;
+	padding: 15px;
+}
+
+.inputEditer{
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+	width:120px;
+	height:40px;
+	margin-top:20px;
 }
