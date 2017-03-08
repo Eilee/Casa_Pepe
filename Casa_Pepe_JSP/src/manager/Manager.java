@@ -13,6 +13,7 @@ import rmi.ServeurInterface;
 
 public class Manager {
 
+	boolean isConnect = false;
 	Registry registry;
 	ServeurInterface serveur;
 	public Manager(){
@@ -35,10 +36,17 @@ public class Manager {
 		}
 	}
 	
+	public boolean getIsConnect(){return isConnect;}
+	public void setIsConnect(boolean b){
+		isConnect = b;
+	}
 	public boolean isIdentificationValid(String id,String mdp){
 		boolean res = false;
 		try{
 			res = serveur.identificationValid(id, mdp);
+			if(res){
+				isConnect = true;
+			}
 		}catch(Exception e){
 			System.out.println("Exception - Client isIdentificationValid(id,mdp");
 		}

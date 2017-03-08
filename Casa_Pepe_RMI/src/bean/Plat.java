@@ -15,17 +15,16 @@ public class Plat implements Serializable{
 	String description;
 	float prix;
 	int idPhoto;
-	int idGroupe;
-	String groupe;
+	
+	int groupe;
 	
 	public Plat(){};
-	public Plat(int id,String n,String desc,float p,int grp,String g,byte[] im){
+	public Plat(int id,String n,String desc,float p,int g,int im){
 		this.ident = id;
 		this.nom = n;
 		this.description = desc;
-		this.idGroupe = grp;
 		this.groupe =g;
-		this.idPhoto = idPhoto;
+		this.idPhoto = im;
 		this.prix = p;
 	}
 	
@@ -56,16 +55,10 @@ public class Plat implements Serializable{
 	public int getIdPhoto() {
 		return this.idPhoto;
 	}
-	public int getIdGroupe() {
-		return idGroupe;
-	}
-	public void setIdGroupe(int idGroupe) {
-		this.idGroupe = idGroupe;
-	}
-	public String getGroupe() {
+	public int getGroupe() {
 		return groupe;
 	}
-	public void setGroupe(String groupe) {
+	public void setGroupe(int groupe) {
 		this.groupe = groupe;
 	}
 	public void setIdPhoto(int id) {

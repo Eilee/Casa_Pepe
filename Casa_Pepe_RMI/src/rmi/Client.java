@@ -30,13 +30,17 @@ public class Client {
 		}
 		
 		try{
-			Plat p = new Plat();
-			p = serveur.getPlat(19);
-			if(serveur.deletePlat(p)){
-				System.out.println("OK");
+			/*Plat p = new Plat(25, "cookies", "cookies au chocolat et a la nougatine", 2, 4, 1);
+			if(serveur.createPlat(p)){
+				System.out.println("Creation plat - OK");
 			}else{
-				System.out.println("KO");
+				System.out.println("Creation plat - KO");
 			}
+			if(serveur.deletePlat(p)){
+				System.out.println("DELETE plat - OK");
+			}else{
+				System.out.println("DELETE plat - KO");
+			}*/
 		}catch(Exception e){
 			System.out.println(e);
 		}

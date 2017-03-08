@@ -8,16 +8,17 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import bean.Plat;
 import manager.Manager;
 
-@WebServlet("/Accueil")
-public class ServletAccueil extends HttpServlet {
-	private static final long serialVersionUID = 1L;
+@WebServlet("/Deconnexion")
+public class ServletDeconnexion extends HttpServlet {
+private static final long serialVersionUID = 1L;
     
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public ServletAccueil() {
+    public ServletDeconnexion() {
 
     }
 
@@ -26,14 +27,17 @@ public class ServletAccueil extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		//Simple chargement de la page , aucun traitement
-		request.getServletContext().getRequestDispatcher("/WEB-INF/Accueil.jsp").forward(request, response);
-		
+		Manager manager = (Manager) request.getSession() .getAttribute("Manager");
+		manager.setIsConnect(false);
+		System.out.println("doPost Deconnexion");
+		response.sendRedirect("Accueil");
 	}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
+		
+		this.doGet(request, response);
 	}
 }
