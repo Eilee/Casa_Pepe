@@ -141,10 +141,10 @@ public class Manager {
 		}
 		return res;
 	}
-	public boolean updatePlat(Plat p){
+	public boolean updatePlat(Plat p,Photo ph){
 		boolean res = false;
 		try{
-			res = serveur.updatePlat(p);
+			res = serveur.updatePlat(p,ph);
 		}catch(Exception e){
 			e.printStackTrace();
 		}

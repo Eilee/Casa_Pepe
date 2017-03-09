@@ -35,7 +35,7 @@
 						  	<option></option>
 						  	<c:forEach items="${groupes}" var="groupe">
 						  		<option value="${groupe.getId()}" 
-							  		<c:if test="${groupe.getId()==plat.getIdGroupe()}">
+							  		<c:if test="${groupe.getId()==plat.getGroupe().getId()}">
 							    		selected
 							    	</c:if>
 						    	>${groupe.getNom()}</option>

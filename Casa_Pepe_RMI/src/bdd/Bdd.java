@@ -221,7 +221,7 @@ public class Bdd {
 	}	
 	public ArrayList<Plat> getMenuPlat(int numMenu){
 		ArrayList<Plat> list = new ArrayList<Plat>();
-		String sqlContient = "SELECT id_plat FROM `t_contient` WHERE `id_menu` = ?";
+		String sqlContient = "SELECT `t_contient`.`id_plat` FROM `t_contient`,`t_plat` WHERE `id_menu` = ? AND `t_contient`.`id_plat`=`t_plat`.`id_plat` ORDER BY `fk_id_grp`";
 		PreparedStatement ps = null;
 		ResultSet rs = null;
 		try {
@@ -277,7 +277,10 @@ public class Bdd {
 				res.setId(rs.getInt("id_plat"));
 				res.setNom(rs.getString("nom_plat"));
 				res.setDescription(rs.getString("desc_plat"));
-				res.setGroupe(rs.getInt("fk_id_grp"));
+				Groupe grp = new Groupe();
+				grp.setId(rs.getInt("fk_id_grp"));
+				grp.setNom(rs.getString("nom_groupe"));
+				res.setGroupe(grp);
 				res.setPrix(rs.getFloat("prix_plat"));
 				res.setIdPhoto(rs.getInt("fk_img_plat"));
 				return res;
@@ -338,13 +341,14 @@ public class Bdd {
 	}
 	public Photo getPhoto(int idPhoto){
 		Photo res = null;
-		String sql = "SELECT * FROM t_photo";
+		String sql = "SELECT * FROM t_photo WHERE `id_photo` = ?";
 		PreparedStatement ps = null;
 		ResultSet rs = null;
 		if(photoExist(idPhoto)){
 			res = new Photo();
 			try {
 				ps = connection.prepareStatement(sql);
+				ps.setInt(1,idPhoto);
 				rs = ps.executeQuery();
 				while(rs.next()){
 					res.setIdPhoto(rs.getInt("id_photo"));
@@ -374,8 +378,8 @@ public class Bdd {
 			ps = connection.prepareStatement(req);
 			ps.setString(1,p.getNom());
 			ps.setString(2,p.getDescription());
-			if(groupeExist(p.getGroupe())){
-				ps.setInt(4,p.getGroupe());
+			if(groupeExist(p.getGroupe().getId())){
+				ps.setInt(4,p.getGroupe().getId());
 				ps.setFloat(5,p.getPrix());	
 				String req1 ="SELECT MAX(id_photo) AS max_id FROM `t_photo`";
 				PreparedStatement ps1 = connection.prepareStatement(req1);
@@ -397,15 +401,23 @@ public class Bdd {
 	}
 	public boolean deletePlat(Plat p){
 		boolean res = false;
+		int idPhoto = 0;
 		String reqDelete ="DELETE FROM `t_plat` WHERE id_plat = ?";
+		String reqPhoto = "SELECT `fk_img_plat` FROM `t_plat` WHERE id_plat = ?";
 		PreparedStatement psPlat = null;
+		PreparedStatement psPhoto = null;
+		ResultSet rs = null;
 		if(platExist(p.getId())){
 			System.out.println("Le plat existe");
 			try{
-				System.out.println("try");
+				psPhoto = connection.prepareStatement(reqPhoto);
+				psPhoto.setInt(1, p.getId());
+				rs = psPhoto.executeQuery();
+				if(rs.next())idPhoto = rs.getInt("fk_img_plat");
 				psPlat = connection.prepareStatement(reqDelete);
 				psPlat.setInt(1, p.getId());
 				psPlat.execute();
+				deletePhoto(idPhoto);
 				res = true;
 			}catch(Exception e){
 				System.out.println("Erreur Base.deletePlat");
@@ -428,6 +440,24 @@ public class Bdd {
 			res = ps.execute();
 		} catch (SQLException e) {
 			System.out.println("Erreur Base.createPhoto "+e.getMessage());
+			e.printStackTrace();
+		}
+		try {if (ps != null) ps.close();} catch (Exception e) {}
+		return res;
+	}
+	public boolean updatePhoto(Photo photo){
+		boolean res = false;
+		String req = "UPDATE `t_photo` SET `img_photo` = ? WHERE `id_photo` = ?;";
+		PreparedStatement ps = null;
+		try {
+			ps = connection.prepareStatement(req);
+			byte[] img = photo.getImg();
+			ByteArrayInputStream bis = new ByteArrayInputStream(img);
+			ps.setBinaryStream(1, bis);
+			ps.setInt(2, photo.getIdPhoto());
+			res = ps.execute();
+		} catch (SQLException e) {
+			System.out.println("Erreur Base.UpdatePhoto "+e.getMessage());
 			e.printStackTrace();
 		}
 		try {if (ps != null) ps.close();} catch (Exception e) {}
@@ -483,22 +513,49 @@ public class Bdd {
 		}
 		return res;
 	}
-	public boolean updatePlat(Plat p){
+	public boolean updatePlat(Plat p,Photo ph){
 		boolean res = false;
-		String req = "UPDATE `t_plat` SET `nom_plat`= ? , `desc_plat`= ? , `fk_id_grp`= ? , `prix_plat`= ? WHERE `t_plat`.`id_plat` = ?";
+		byte[] bytes = null;
+		String req = "SELECT * FROM `t_plat`,`t_photo` WHERE `id_plat` = ? AND `id_photo`=`fk_img_plat`";
+		String req1 ="SELECT MAX(id_photo) AS max_id FROM `t_photo`";
+		String req2 = "UPDATE `t_plat` SET ";
+		PreparedStatement ps = null;
+		PreparedStatement ps1 = null;
+		PreparedStatement ps2 = null;
+		ResultSet rs = null;
+		ResultSet rs1 = null;
 		if(platExist(p.getId())){
-			PreparedStatement ps = null;
 			try{
 				ps = connection.prepareStatement(req);
-				ps.setString(1,p.getNom());
-				ps.setString(2,p.getDescription());
-				ps.setInt(3,p.getGroupe());
-				ps.setFloat(4,p.getPrix());
-				ps.setInt(5,p.getId());
-				ps.execute();
-				res = true;
+				ps.setInt(1,p.getId());
+				rs = ps.executeQuery();
+				while(rs.next()){
+					if(!rs.getString("nom_plat").equals(p.getNom()))req2 += "`nom_plat`= '"+p.getNom()+"', ";
+					if(!rs.getString("desc_plat").equals(p.getDescription()))req2 += "`desc_plat`= '"+p.getDescription()+"', ";
+					if(rs.getInt("fk_id_grp")!=p.getGroupe().getId())req2 += "`fk_id_grp`= '"+p.getGroupe().getId()+"', ";
+					if(rs.getInt("prix_plat")!=p.getPrix())req2 += "`prix_plat`= '"+p.getPrix()+"', ";
+					ph.setIdPhoto(rs.getInt("fk_img_plat"));
+					Blob blob = rs.getBlob("img_photo");
+					int blobLength =(int) blob.length();
+					bytes = blob.getBytes(1, blobLength);
+					blob.free();
+				}
+				if(ph.getImg()!=null && ph.getImg()!=bytes){
+					updatePhoto(ph);
+					req2 += "`fk_img_plat`= '"+ph.getIdPhoto()+"', ";
+				}
+				if(req2.length()>22){
+					req2 = req2.substring(0,req2.length()-2);
+					req2 += "WHERE `id_plat` = "+p.getId();
+					System.out.println(req2);
+					ps2 = connection.prepareStatement(req2);
+					ps2.execute();
+					res = true;
+				}else{
+					res = false;
+				}
 			}catch(Exception e){
-				System.out.println("Erreur Base.UpdatePlat");
+				System.out.println("Erreur Base.UpdatePlat ");
 			}
 		}
 		

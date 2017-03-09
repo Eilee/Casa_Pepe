@@ -72,8 +72,8 @@ public class ServeurImpl implements ServeurInterface{
 	public boolean deletePlat(Plat p) throws RemoteException{
 		return base.deletePlat(p);
 	}
-	public boolean updatePlat(Plat p) throws RemoteException{
-		return base.updatePlat(p);
+	public boolean updatePlat(Plat p,Photo ph) throws RemoteException{
+		return base.updatePlat(p,ph);
 	}
 	public boolean createGroupe(Groupe groupe) throws RemoteException{
 		return base.createGroupe(groupe);

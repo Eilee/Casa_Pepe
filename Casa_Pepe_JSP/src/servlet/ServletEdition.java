@@ -62,58 +62,51 @@ public class ServletEdition extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		System.out.println("doPost Edition");
 		Manager manager = (Manager) request.getSession().getAttribute("Manager");
+		if(manager==null)response.sendRedirect("Accueil");
+		
+		Plat p = null;
+		Photo ph = null;
+		Groupe grp = null;
+		InputStream inputStream = null;
+		Part filePart = null;
+		byte[] bytes = null;
+		
 		String nom = request.getParameter("nom");
 		String description = request.getParameter("description");
 		String groupe = request.getParameter("groupe");
 		String prix = request.getParameter("prix");
 		String id = request.getParameter("id");
+		filePart = request.getPart("image");
 		
-		InputStream inputStream = null; // input stream of the upload file
-		// obtains the upload file part in this multipart request
-		Part filePart = request.getPart("image");
-		if (filePart != null) {
-		    // prints out some information for debugging
-		    System.out.println(filePart.getName());
-		    System.out.println(filePart.getSize());
-		    System.out.println(filePart.getContentType());
-		     
-		    // obtains input stream of the upload file
-		    inputStream = filePart.getInputStream();
+		ph = new Photo();
+		inputStream = filePart.getInputStream();
+		bytes = IOUtils.toByteArray(inputStream);
+		if(bytes.length>0){
+			ph.setImg(bytes);
 		}
-	    byte[] bytes = IOUtils.toByteArray(inputStream);
-
 	    
 	    if(id.length()<1 && nom!=null && description!=null && groupe!=null && prix!=null && inputStream!=null){
-	    	Plat p = new Plat();
+	    	p = new Plat();
 			p.setNom(nom);
 			p.setDescription(description);
-			p.setGroupe(Integer.parseInt(groupe));
+			grp = new Groupe();
+			grp.setId(Integer.parseInt(groupe));
+			p.setGroupe(grp);
 			p.setPrix(Float.parseFloat(prix));
-			Photo ph = new Photo();
-			ph.setImg(bytes);
 			manager.createPlat(p,ph);
-	    }else if(nom!=null || description!=null || groupe!=null || prix!=null){
-			Plat p = new Plat();
-			if(id.length()>0)p.setId(Integer.parseInt(id));
+	    }else if(nom!=null || description!=null || groupe!=null || prix!=null || inputStream!=null){
+			p = new Plat();
+			p.setId(Integer.parseInt(id));
 			p.setNom(nom);
 			p.setDescription(description);
-			if(groupe.length()>0)p.setGroupe(Integer.parseInt(groupe));
+			if(groupe.length()>0){
+				grp = new Groupe();
+				grp.setId(Integer.parseInt(groupe));
+				p.setGroupe(grp);
+			}
 			if(prix.length()>0)p.setPrix(Float.parseFloat(prix));
-			manager.updatePlat(p);
+			manager.updatePlat(p,ph);
 		}
 		response.sendRedirect("GestionPlats");
-		/*if(create!=null){
-			System.out.println("Creation d'un plats");
-			request.setAttribute("nomPlats", update);
-			response.sendRedirect("Edition");
-		}else if(update!=null){
-			System.out.println("Modification du plats : "+update);
-			request.setAttribute("nomPlats", update);
-			response.sendRedirect("Edition");
-		}else if(delete!=null){
-			System.out.println("Suppression du plats : "+delete);
-			manager.deletePlat(delete);
-			doGet(request,response);
-		}*/
 	}
 }

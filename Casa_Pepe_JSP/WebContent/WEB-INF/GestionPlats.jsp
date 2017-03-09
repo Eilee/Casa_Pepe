@@ -32,7 +32,7 @@
 		        <tr>
 		            <td>${listPlat.getNom()}</td>
 		            <td>${listPlat.getDescription()}</td>
-		            <td>${listPlat.getGroupe()}</td>
+		            <td>${listPlat.getGroupe().getNom()}</td>
 		            <td>${listPlat.getPrix()}</td>
 		            <td>
 		            	<form method="post">
