@@ -150,4 +150,13 @@ public class Manager {
 		}
 		return res;
 	}
+	public boolean createPlat(Plat p, Photo ph){
+		boolean res = false;
+		try{
+			res = serveur.createPlat(p,ph);
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+		return res;
+	}
 }

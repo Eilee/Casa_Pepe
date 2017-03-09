@@ -365,18 +365,26 @@ public class Bdd {
 	}
 	
 	//Gestion des  entitées
-	public boolean createPlat(Plat p){
+	public boolean createPlat(Plat p,Photo ph){
 		boolean res = false;
 		String req = "INSERT INTO `t_plat`(`nom_plat`, `desc_plat`, `fk_img_plat`, `fk_id_grp`, `prix_plat`) VALUES (?,?,?,?,?)";
 		PreparedStatement ps = null;
+		createPhoto(ph);
 		try {
 			ps = connection.prepareStatement(req);
 			ps.setString(1,p.getNom());
 			ps.setString(2,p.getDescription());
-			ps.setInt(3, p.getIdPhoto());
 			if(groupeExist(p.getGroupe())){
 				ps.setInt(4,p.getGroupe());
-				ps.setFloat(5,p.getPrix());				
+				ps.setFloat(5,p.getPrix());	
+				String req1 ="SELECT MAX(id_photo) AS max_id FROM `t_photo`";
+				PreparedStatement ps1 = connection.prepareStatement(req1);
+				ResultSet rs = ps1.executeQuery();
+				int max = 0;
+				while(rs.next()){
+					max = rs.getInt("max_id");
+				}
+				ps.setFloat(3,max);	
 				ps.execute();
 				res = true;
 			}

@@ -65,8 +65,8 @@ public class ServeurImpl implements ServeurInterface{
 		return base.getPhoto(idPhoto);
 	}
 	//Gestion des entitées
-	public boolean createPlat(Plat p) throws RemoteException{
-		boolean res =  base.createPlat(p);
+	public boolean createPlat(Plat p,Photo ph) throws RemoteException{
+		boolean res =  base.createPlat(p,ph);
 		return res;
 	}
 	public boolean deletePlat(Plat p) throws RemoteException{

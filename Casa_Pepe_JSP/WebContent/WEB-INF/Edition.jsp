@@ -17,7 +17,7 @@
 </div>
 <div class="row">
 	<div class="col-md-12 tableEdition">
-		<form method="post">
+		<form method="post" enctype="multipart/form-data">
 			<table align="center">
 				<tr>
 					<td>Nom du plat</td>

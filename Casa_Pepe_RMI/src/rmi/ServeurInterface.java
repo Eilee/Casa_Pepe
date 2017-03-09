@@ -21,7 +21,7 @@ public interface ServeurInterface extends Remote {
 	public Groupe getGroupe(int idGroupe) throws RemoteException;
 	public Photo getPhoto(int idPhoto) throws RemoteException;
 	
-	public boolean createPlat(Plat p) throws RemoteException;
+	public boolean createPlat(Plat p,Photo ph) throws RemoteException;
 	public boolean updatePlat(Plat p) throws RemoteException;
 	public boolean deletePlat(Plat p) throws RemoteException;
 	public boolean createGroupe(Groupe groupe) throws RemoteException;

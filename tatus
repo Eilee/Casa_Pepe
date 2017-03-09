@@ -1,0 +1,82 @@
+* [33mc96ddd5[m[33m ([1;36mHEAD[m[33m, [1;31morigin/master[m[33m, [1;31morigin/HEAD[m[33m, [1;32mmaster[m[33m)[m Suppression OK
+*   [33mbbd854d[m Merge branch 'master' of github.com:Eilee/Casa_Pepe
+[32m|[m[33m\[m  
+[32m|[m * [33m08b0d42[m  creation+suppresion plat en BDD
+[32m|[m * [33me0ae37d[m Connection et deconnexion OK
+* [33m|[m [33m97997d5[m Modification d'un plat
+[33m|[m[33m/[m  
+*   [33m88091d1[m Merge branch 'master' of github.com:Eilee/Casa_Pepe
+[34m|[m[35m\[m  
+[34m|[m * [33m327adfe[m Image OK !
+* [35m|[m [33m841956d[m Edition encore et toujours
+[35m|[m[35m/[m  
+*   [33m6a8f89b[m Merge branch 'master' of github.com:Eilee/Casa_Pepe
+[36m|[m[1;31m\[m  
+[36m|[m * [33m1e931e1[m Modification BDD pour photo en dehors des plats
+[36m|[m *   [33m9c11c2a[m Merge branch 'master' of github.com:Eilee/Casa_Pepe
+[36m|[m [1;32m|[m[1;33m\[m  
+[36m|[m * [1;33m|[m [33m27d64ea[m recuperation avant modification pour photo
+* [1;33m|[m [1;33m|[m [33m3caa805[m Suite du travail sur Edition
+[1;33m|[m [1;33m|[m[1;33m/[m  
+[1;33m|[m[1;33m/[m[1;33m|[m   
+* [1;33m|[m [33mff4b5ba[m Mise en place de l'édition et de la création + ajout id à chaque bean
+[1;33m|[m[1;33m/[m  
+* [33m6a41265[m Suppression d'un plat
+* [33m1beb475[m bon rmi
+*   [33m25a3e1b[m Merge branch 'master' of github.com:Eilee/Casa_Pepe
+[1;34m|[m[1;35m\[m  
+[1;34m|[m * [33md98c859[m Ajout creation suppression BDD
+* [1;35m|[m [33m3abfc99[m Menus affichage des images + gestion des groupes fini
+[1;35m|[m[1;35m/[m  
+*   [33md736690[m Merge branch 'master' of github.com:Eilee/Casa_Pepe
+[1;36m|[m[31m\[m  
+[1;36m|[m * [33md6716f4[m GetAllMenu
+* [31m|[m [33m0e12499[m Gestion des groupes affichage avec la bdd en cours
+[31m|[m[31m/[m  
+*   [33m29fa442[m Merge branch 'master' of github.com:Eilee/Casa_Pepe
+[32m|[m[33m\[m  
+[32m|[m * [33mb0ddcbd[m Gestion Plats, affichage avec bdd
+* [33m|[m [33m5214159[m  recuperation img en bdd
+[33m|[m[33m/[m  
+*   [33m7073d8e[m Merge branch 'master' of github.com:Eilee/Casa_Pepe
+[34m|[m[35m\[m  
+[34m|[m * [33m6a36dfe[m .projects
+[34m|[m *   [33m470b9cc[m Merge branch 'master' of github.com:Eilee/Casa_Pepe
+[34m|[m [36m|[m[1;31m\[m  
+[34m|[m * [1;31m|[m [33m879f688[m correction 2
+* [1;31m|[m [1;31m|[m [33m3889e74[m recuperation
+[1;31m|[m [1;31m|[m[1;31m/[m  
+[1;31m|[m[1;31m/[m[1;31m|[m   
+* [1;31m|[m   [33mbc3b8e5[m fermeture ps et rs
+[1;32m|[m[1;31m\[m [1;31m\[m  
+[1;32m|[m [1;31m|[m[1;31m/[m  
+[1;32m|[m * [33mf8b471f[m correction erreurs merge
+[1;32m|[m *   [33me7106d2[m Merge branch 'master' of github.com:Eilee/Casa_Pepe
+[1;32m|[m [1;34m|[m[1;35m\[m  
+[1;32m|[m * [1;35m|[m [33mb5b30f9[m background
+* [1;35m|[m [1;35m|[m [33me9a6082[m correction fermeture PS et rs
+[1;35m|[m [1;35m|[m[1;35m/[m  
+[1;35m|[m[1;35m/[m[1;35m|[m   
+* [1;35m|[m [33ma33590e[m  avancement BDD et communication 1
+* [1;35m|[m [33m98860c3[m modification bean
+[1;35m|[m[1;35m/[m  
+*   [33m158b18f[m Merge branch 'master' of github.com:Eilee/Casa_Pepe
+[1;36m|[m[31m\[m  
+[1;36m|[m * [33mcbb4884[m  Communication OK ! Debut Servlet
+* [31m|[m [33mb9ef9fb[m Ebauche gestion plats et gestion groupes
+[31m|[m[31m/[m  
+* [33mc07ace4[m début servletPlat
+* [33ma2d8828[m exemple de menu
+* [33mbb30927[m Rmi.jar
+*   [33m9eb4038[m Merge branch 'master' of github.com:Eilee/Casa_Pepe
+[32m|[m[33m\[m  
+[32m|[m *   [33m5b6b480[m Merge branch 'master' of github.com:Eilee/Casa_Pepe
+[32m|[m [34m|[m[35m\[m  
+[32m|[m * [35m|[m [33m4ca135a[m connexion+communication
+* [35m|[m [35m|[m [33m6e3aa77[m header et footer
+[35m|[m [35m|[m[35m/[m  
+[35m|[m[35m/[m[35m|[m   
+* [35m|[m [33ma4f03d8[m ebauche du site avec menu
+[35m|[m[35m/[m  
+* [33m914344c[m Projet RMI
+* [33m3138d93[m projet JSP
