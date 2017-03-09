@@ -19,7 +19,7 @@
 <div class="row">
 	<form method="post">
 		<input name="create" value="true" type="hidden"/>
-		<input type="image" src="img/creer.jpg" border="0" alt="Submit" class="inputCreate"/>
+		<input type="image" src="img/creer2.jpg" border="0" alt="Submit" class="inputCreate"/>
 	</form>
 	<div class="col-md-12 tableGestion tableIcone">
 		<table align="center">

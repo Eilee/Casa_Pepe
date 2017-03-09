@@ -74,6 +74,10 @@ public class ServletEdition extends HttpServlet {
 		String prix = request.getParameter("prix");
 		String id = request.getParameter("id");
 		filePart = request.getPart("image");
+
+		if(groupe.equals("")){
+			
+		}
 		
 		ph = new Photo();
 		inputStream = filePart.getInputStream();
@@ -81,8 +85,8 @@ public class ServletEdition extends HttpServlet {
 		if(bytes.length>0){
 			ph.setImg(bytes);
 		}
-	    
-	    if(id.length()<1 && nom!=null && description!=null && groupe!=null && prix!=null && inputStream!=null){
+		
+	    if(id.equals("") && !nom.equals("") && !description.equals("") && !groupe.equals("") && !prix.equals("") && !inputStream.equals("")){
 	    	p = new Plat();
 			p.setNom(nom);
 			p.setDescription(description);
@@ -91,7 +95,8 @@ public class ServletEdition extends HttpServlet {
 			p.setGroupe(grp);
 			p.setPrix(Float.parseFloat(prix));
 			manager.createPlat(p,ph);
-	    }else if(nom!=null || description!=null || groupe!=null || prix!=null || inputStream!=null){
+			response.sendRedirect("GestionPlats");
+	    }else if(!id.equals("") && !nom.equals("") && !description.equals("") && !groupe.equals("") && !prix.equals("") && !inputStream.equals("")){
 			p = new Plat();
 			p.setId(Integer.parseInt(id));
 			p.setNom(nom);
@@ -103,7 +108,10 @@ public class ServletEdition extends HttpServlet {
 			}
 			if(prix.length()>0)p.setPrix(Float.parseFloat(prix));
 			manager.updatePlat(p,ph);
+			response.sendRedirect("GestionPlats");
+		}else{
+			request.setAttribute("error",2);
+			doGet(request,response);
 		}
-		response.sendRedirect("GestionPlats");
 	}
 }

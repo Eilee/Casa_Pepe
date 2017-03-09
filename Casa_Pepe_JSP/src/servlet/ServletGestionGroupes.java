@@ -9,7 +9,10 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.itextpdf.text.DocumentException;
+
 import bean.Groupe;
+import bean.PdfCreator;
 import manager.Manager;
 
 @WebServlet("/GestionGroupes")
@@ -61,8 +64,7 @@ public class ServletGestionGroupes extends HttpServlet {
 			doGet(request,response);
 		}else if(pdf!=null){
 			System.out.println("Production du pdf : "+pdf);
-			
-			doGet(request,response);
+			response.sendRedirect("PdfFile?idGroupe="+pdf);
 		}
 	}
 }

@@ -334,6 +334,27 @@ public class Bdd {
 		try {if (rs != null) rs.close();} catch (Exception e) {}
 		return list;
 	}
+	public ArrayList<Plat> getPlatsDuGroupe(int idGroupe){
+		ArrayList<Plat> list = new ArrayList<Plat>();
+		String sqlContient = "SELECT * FROM `t_groupe`,`t_plat` WHERE `id_groupe` = ? AND `t_groupe`.`id_groupe` = `t_plat`.`fk_id_grp`";
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		try {
+			ps = connection.prepareStatement(sqlContient);
+			ps.setInt(1,idGroupe);
+			rs = ps.executeQuery();
+			while(rs.next()){
+				int id = rs.getInt("id_plat");
+				list.add(this.getPlat(id));
+			}
+		} catch (SQLException e) {
+			System.out.println("Erreur Base.getPlatsDuGroupe "+e.getMessage());
+			e.printStackTrace();
+		}
+		try {if (ps != null) ps.close();} catch (Exception e) {}
+		try {if (rs != null) rs.close();} catch (Exception e) {}
+		return list;
+	}
 	public Groupe getGroupe(int idGroupe){
 		Groupe res = null;
 		String sql ="SELECT * FROM `t_groupe` WHERE `id_groupe` = ?";

@@ -52,6 +52,7 @@ Manager manager = (Manager) request.getSession().getAttribute("Manager");
 			System.out.println("Identification KO");
 			request.setAttribute("ident", ident);
 			request.setAttribute("mdp", mdp);
+			request.setAttribute("error", 2);
 			doGet(request,response);
 		}
 	}

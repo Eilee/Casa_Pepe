@@ -195,5 +195,16 @@ public class Manager {
 		}
 		return res;
 	}
+	public ArrayList<Plat> getPlatsDuGroupe(int idGroupe){
+		ArrayList<Plat> res = null;
+		try {
+			res = serveur.getPlatsDuGroupe(idGroupe);
+			return res;
+		} catch (RemoteException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return res;
+	}
 	
 }

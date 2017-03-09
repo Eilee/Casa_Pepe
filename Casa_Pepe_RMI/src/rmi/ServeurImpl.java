@@ -57,6 +57,9 @@ public class ServeurImpl implements ServeurInterface{
 	public ArrayList<Groupe> getAllGroupe() throws RemoteException{
 		return base.getAllGroupe();
 	}
+	public ArrayList<Plat> getPlatsDuGroupe(int idGroupe) throws RemoteException{
+		return base.getPlatsDuGroupe(idGroupe);
+	}
 	public Groupe getGroupe(int idGroupe) throws RemoteException{
 		return base.getGroupe(idGroupe);
 	}

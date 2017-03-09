@@ -16,6 +16,14 @@
 	</div>
 </div>
 <div class="row">
+	<c:if test="${error==2}">
+		<div class="col-md-6 col-md-offset-3 alert alert-danger" style="text-align:center;">
+		  <p><strong>Erreur</strong> L'un des champs n'a pas été correctement remplie.</p>
+		  <p>La connexion a échoué</p>
+		</div>
+	</c:if>
+</div>
+<div class="row">
 	<div class="col-md-12">
 		<form method="post" action="Connexion">
 			<table>
