@@ -78,6 +78,9 @@ public class ServeurImpl implements ServeurInterface{
 	public boolean createGroupe(Groupe groupe) throws RemoteException{
 		return base.createGroupe(groupe);
 	}
+	public boolean updateGroupe(Groupe groupe) throws RemoteException{
+		return base.updateGroupe(groupe);
+	}
 	public boolean deleteGroupe(int idGroupe) throws RemoteException{
 		return base.deleteGroupe(idGroupe);
 	}

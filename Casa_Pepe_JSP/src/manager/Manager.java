@@ -159,4 +159,41 @@ public class Manager {
 		}
 		return res;
 	}
+	public Groupe getGroupe(int idGroupe){
+		Groupe res = new Groupe();
+		try{
+			res = serveur.getGroupe(idGroupe);
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+		return res;
+	}
+	public boolean createGroupe(Groupe grp){
+		boolean res = false;
+		try{
+			res = serveur.createGroupe(grp);
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+		return res;
+	}
+	public boolean updateGroupe(Groupe grp){
+		boolean res = false;
+		try{
+			res = serveur.updateGroupe(grp);
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+		return res;
+	}
+	public boolean deleteGroupe(int idGroupe){
+		boolean res = false;
+		try{
+			res = serveur.deleteGroupe(idGroupe);
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+		return res;
+	}
+	
 }

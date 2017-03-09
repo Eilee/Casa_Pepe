@@ -7,8 +7,10 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
+import java.util.Date;
 
 import bean.Groupe;
 import bean.Menu;
@@ -59,7 +61,7 @@ public class Bdd {
 	//Test si existant
 	public boolean identIsValid(String id,String mdp){
 		boolean res = false;
-		String sql ="SELECT ident_admin FROM `t_administrateur` WHERE `ident_admin` = ? AND`mdp_admin` = ?";
+		String sql ="SELECT * FROM `t_administrateur` WHERE `ident_admin` = ? AND`mdp_admin` = ?";
 		PreparedStatement ps = null;
 		ResultSet rs = null;
 		try {
@@ -69,6 +71,7 @@ public class Bdd {
 			rs = ps.executeQuery();
 			if(rs.next()){
 				System.out.println(rs.getString("ident_admin"));
+				createLog(rs.getInt("id_admin"));
 				res = true;
 			}
 
@@ -81,6 +84,23 @@ public class Bdd {
 		try {if (rs != null) rs.close();} catch (Exception e) {}
 		
 		return res;
+	}
+	public void createLog(int idAdmin){
+		PreparedStatement ps = null;
+		String format = "dd/MM/yy H:mm:ss";
+		SimpleDateFormat formater = new SimpleDateFormat( format );
+		Date date = new Date();
+		String sToday = formater.format( date ).toString(); 
+		String req = "INSERT INTO `t_log`(`date_log`,`fk_id_admin`) VALUES ('"+sToday+"',"+idAdmin+")";
+		try {
+			ps = connection.prepareStatement(req);
+			System.out.println(sToday+idAdmin);
+			ps.execute();
+		} catch (SQLException e) {
+			System.out.println("Erreur Base.createPhoto "+e.getMessage());
+			e.printStackTrace();
+		}
+		try {if (ps != null) ps.close();} catch (Exception e) {}
 	}
 	private boolean menuExist(int idMenu){
 		boolean res = false;
@@ -485,7 +505,6 @@ public class Bdd {
 		String req = "INSERT INTO `t_groupe`(`nom_groupe`) VALUES (?)";
 		if(!groupeExist(groupe.getId())){
 			PreparedStatement ps = null;
-			ResultSet rs = null;
 			try{
 				ps = connection.prepareStatement(req);
 				ps.setString(1, groupe.getNom());
@@ -493,6 +512,23 @@ public class Bdd {
 				res = true;
 			}catch(Exception e){
 				System.out.println("Erreur Base.CreateGroupe");
+			}
+		}
+		return res;
+	}
+	public boolean updateGroupe(Groupe groupe){
+		boolean res = false;
+		String req = "UPDATE `t_groupe` SET `nom_groupe` = ? WHERE `id_groupe` = ?";
+		if(groupeExist(groupe.getId())){
+			PreparedStatement ps = null;
+			try{
+				ps = connection.prepareStatement(req);
+				ps.setString(1, groupe.getNom());
+				ps.setInt(2, groupe.getId());
+				ps.execute();
+				res = true;
+			}catch(Exception e){
+				System.out.println("Erreur Base.UpdateGroupe");
 			}
 		}
 		return res;

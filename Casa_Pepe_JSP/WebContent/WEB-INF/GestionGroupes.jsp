@@ -17,6 +17,10 @@
 	</div>
 </div>
 <div class="row">
+	<form method="post">
+		<input name="create" value="true" type="hidden"/>
+		<input type="image" src="img/creer.jpg" border="0" alt="Submit" class="inputCreate"/>
+	</form>
 	<div class="col-md-12 tableGestion tableIcone">
 		<table align="center">
 			<tr>
@@ -25,8 +29,24 @@
 			<c:forEach items="${listGroupes}" var="listGroupe">
 		        <tr>
 		            <td>${listGroupe.getNom()}</td>
-					<td><a href="Modification"><img src="img/modifier.png"/></a></td>
-					<td><a href=""><img src="img/supprimer.png" /></a></td>
+					<td>
+		            	<form method="post">
+							<input name="pdf" value="${listGroupe.getId()}" type="hidden"/>
+							<input type="image" src="img/pdf.png" border="0" alt="Submit"/>
+						</form>
+		            </td>
+					<td>
+		            	<form method="post">
+							<input name="update" value="${listGroupe.getId()}" type="hidden"/>
+							<input type="image" src="img/modifier.png" border="0" alt="Submit"/>
+						</form>
+		            </td>
+					<td>
+						<form method="post" onsubmit="return confirm('Voulez-vous vraiment supprimer ce plats ?');">
+							<input name="delete" value="${listGroupe.getId()}" type="hidden"/>
+							<input type="image" src="img/supprimer.png" border="0" alt="Submit"/>
+						</form>
+					</td>
 		        </tr>
 		    </c:forEach>
 		</table>

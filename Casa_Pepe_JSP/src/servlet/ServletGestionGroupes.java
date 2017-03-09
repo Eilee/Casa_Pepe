@@ -10,7 +10,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import bean.Groupe;
-import bean.Plat;
 import manager.Manager;
 
 @WebServlet("/GestionGroupes")
@@ -44,15 +43,26 @@ public class ServletGestionGroupes extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		System.out.println("doPost Gestion Plats");
 		Manager manager = (Manager) request.getSession().getAttribute("Manager");
-		/*if(manager.recupereAllPlatsServ()){
-			System.out.println("GestionGroupes OK");
-			response.sendRedirect("GestionGroupes.jsp");
-			//passage de la session dans la request
-			//request.setAttribute(request.getSession(), arg1);
-		}else{
-			System.out.println("GestionGroupes KO");
+		String create = request.getParameter("create");
+		String update = request.getParameter("update");
+		String delete = request.getParameter("delete");
+		String pdf = request.getParameter("pdf");
+		if(create!=null){
+			System.out.println("Creation d'un plat");
+			response.sendRedirect("EditionGroupe");
+		}else if(update!=null){
+			System.out.println("Modification d'un groupe : "+update);
+			response.sendRedirect("EditionGroupe?idGroupe="+update);
+		}else if(delete!=null){
+			System.out.println("Suppression d'un groupe : "+delete);
+			manager.deleteGroupe(Integer.parseUnsignedInt(delete));
 			doGet(request,response);
-		}*/
+		}else if(pdf!=null){
+			System.out.println("Production du pdf : "+pdf);
+			
+			doGet(request,response);
+		}
 	}
 }

@@ -8,7 +8,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import bean.Plat;
 import manager.Manager;
 
 @WebServlet("/Connexion")
@@ -32,8 +31,9 @@ Manager manager = (Manager) request.getSession().getAttribute("Manager");
 		
 		if(manager==null){
 			response.sendRedirect("Accueil");
+		}else{
+			request.getServletContext().getRequestDispatcher("/WEB-INF/Connexion.jsp").forward(request, response);
 		}
-		request.getServletContext().getRequestDispatcher("/WEB-INF/Connexion.jsp").forward(request, response);
 	}
 
 	/**
