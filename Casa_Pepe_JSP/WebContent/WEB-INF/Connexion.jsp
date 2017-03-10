@@ -33,7 +33,7 @@
 				<tr>
 					<td>Mot de passe : </td> <td><input name ="mdp" type="password" value="" /></td>
 				</tr>
-				<tr><td><input name ="Enregistrer" type="submit" value ="Enregistrer"/></td></tr>
+				<tr><td><input name ="Enregistrer" type="submit" value ="Se connecter"/></td></tr>
 			</table>
 		</form>
 	</div>
