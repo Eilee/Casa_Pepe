@@ -334,6 +334,39 @@ public class Bdd {
 		return res;
 	}
 	
+	//Renvoie un plat à partir de son nom
+	public Plat getPlat(String nomPlat){
+		Plat res = null;
+		String sql ="SELECT * FROM `t_plat`,`t_groupe` WHERE `nom_plat` = ? AND `id_groupe`=`fk_id_grp`";
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		try {
+			ps = connection.prepareStatement(sql);
+			ps.setString(1,nomPlat);
+			rs = ps.executeQuery();
+			//Si le menu existe en BDD on crée un menu avec ce nom
+			if(rs.next()){
+				res = new Plat();
+				res.setId(rs.getInt("id_plat"));
+				res.setNom(rs.getString("nom_plat"));
+				res.setDescription(rs.getString("desc_plat"));
+				Groupe grp = new Groupe();
+				grp.setId(rs.getInt("fk_id_grp"));
+				grp.setNom(rs.getString("nom_groupe"));
+				res.setGroupe(grp);
+				res.setPrix(rs.getFloat("prix_plat"));
+				res.setIdPhoto(rs.getInt("fk_img_plat"));
+				return res;
+			}
+		} catch (SQLException e) {
+			System.out.println("Erreur Base.getPlat "+e.getMessage());
+			e.printStackTrace();
+		}
+		try {if (ps != null) ps.close();} catch (Exception e) {}
+		try {if (rs != null) rs.close();} catch (Exception e) {}
+		return res;
+	}
+		
 	//Renvoie la liste de tous les groupes
 	public ArrayList<Groupe> getAllGroupe(){
 		ArrayList<Groupe> list = new ArrayList<Groupe>();
@@ -389,6 +422,33 @@ public class Bdd {
 		try {
 			ps = connection.prepareStatement(sql);
 			ps.setInt(1,idGroupe);
+			rs = ps.executeQuery();
+			//Si le groupe existe en BDD on crée un groupe avec ce nom
+			if(rs.next()){
+				res = new Groupe();
+				res.setId(rs.getInt("id_groupe"));
+				res.setNom(rs.getString("nom_groupe"));
+				System.out.println(res.toString());
+				return res;
+			}
+		} catch (SQLException e) {
+			System.out.println("Erreur Base.getGroupe "+e.getMessage());
+			e.printStackTrace();
+		}
+		try {if (ps != null) ps.close();} catch (Exception e) {}
+		try {if (rs != null) rs.close();} catch (Exception e) {}
+		return res;
+	}
+
+	//Renvoie un groupe à partir de son nom
+	public Groupe getGroupe(String nomGroupe){
+		Groupe res = null;
+		String sql ="SELECT * FROM `t_groupe` WHERE `nom_groupe` = ?";
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		try {
+			ps = connection.prepareStatement(sql);
+			ps.setString(1,nomGroupe);
 			rs = ps.executeQuery();
 			//Si le groupe existe en BDD on crée un groupe avec ce nom
 			if(rs.next()){

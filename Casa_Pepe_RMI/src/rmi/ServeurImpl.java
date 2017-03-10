@@ -54,6 +54,9 @@ public class ServeurImpl implements ServeurInterface{
 	public Plat getPlat(int idPlat) throws RemoteException{
 		return base.getPlat(idPlat);
 	}
+	public Plat getPlat(String nomPlat) throws RemoteException{
+		return base.getPlat(nomPlat);
+	}
 	public ArrayList<Groupe> getAllGroupe() throws RemoteException{
 		return base.getAllGroupe();
 	}
@@ -62,6 +65,9 @@ public class ServeurImpl implements ServeurInterface{
 	}
 	public Groupe getGroupe(int idGroupe) throws RemoteException{
 		return base.getGroupe(idGroupe);
+	}
+	public Groupe getGroupe(String nomGroupe) throws RemoteException{
+		return base.getGroupe(nomGroupe);
 	}
 	public Photo getPhoto(int idPhoto) throws RemoteException{
 		return base.getPhoto(idPhoto);

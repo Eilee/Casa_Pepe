@@ -16,10 +16,12 @@ public interface ServeurInterface extends Remote {
 	public ArrayList<Plat> getMenuPlat(int numMenu) throws RemoteException;
 	public ArrayList<Plat> getAllPlat() throws RemoteException;
 	public Plat getPlat(int idPlat) throws RemoteException;
+	public Plat getPlat(String nomPlat) throws RemoteException;
 	public ArrayList<Groupe> getAllGroupe() throws RemoteException;
 	public ArrayList<Plat> getPlatsDuGroupe(int id) throws RemoteException;
 	public ArrayList<Menu> getAllMenu() throws RemoteException;
 	public Groupe getGroupe(int idGroupe) throws RemoteException;
+	public Groupe getGroupe(String nomGroupe) throws RemoteException;
 	public Photo getPhoto(int idPhoto) throws RemoteException;
 	
 	public boolean createPlat(Plat p,Photo ph) throws RemoteException;

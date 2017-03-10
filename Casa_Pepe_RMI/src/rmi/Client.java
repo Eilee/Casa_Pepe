@@ -112,8 +112,7 @@ public class Client {
 			}
 			/*	Test Modification	*/
 			System.out.println("Modification");
-			Plat pExistant = new Plat(6,"La burrata","Fromage pas bon ",
-					15,new Groupe(2,"Entrée"),1);
+			Plat pExistant = serveur.getPlat(pNonExistant.getNom());
 			
 			if(serveur.updatePlat(pExistant, new Photo(newImg))){
 				System.out.println("Update Plat - OK");
@@ -125,8 +124,7 @@ public class Client {
 			/*	Test Suppression	*/
 			System.out.println("Suppression");
 			//Pensez a modifier l'id en fonction du contenu de la base de données ( a cause de l'auto Incrémentation)
-			pNonExistant.setId(40);
-			if(serveur.deletePlat(pNonExistant)){
+			if(serveur.deletePlat(pExistant)){
 				System.out.println("Suppression - OK");
 			}else{
 				System.out.println("Suppression Plat - KO");
@@ -143,15 +141,16 @@ public class Client {
 			}
 			/*	Test Modification	*/
 			// Changement de l'id en fonction du contenu de la base ( identifiant auto incrémenté)
-			groupe.setId(12);
-			groupe.setNom("groupe Test modifié");
-			if(serveur.updateGroupe(groupe)){
+			Groupe groupeExistant = serveur.getGroupe("GroupeTest");
+			groupeExistant.setNom("groupe Test modifié");
+			if(serveur.updateGroupe(groupeExistant)){
 				System.out.println("update Groupe - OK");
 			}else{
 				System.out.println("update Groupe KO");
 			}
 			/*	Test Suppression	*/
-			if(serveur.deleteGroupe(12)){
+			groupeExistant = serveur.getGroupe("groupe Test modifié");
+			if(serveur.deleteGroupe(groupeExistant.getId())){
 				System.out.println("Delete Groupe - OK");
 			}else{
 				System.out.println("Delete Groupe KO");
