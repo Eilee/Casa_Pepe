@@ -76,9 +76,6 @@ public class ServletEdition extends HttpServlet {
 		String id = request.getParameter("id");
 		filePart = request.getPart("image");
 
-		if(groupe.equals("")){
-			
-		}
 		
 		ph = new Photo();
 		inputStream = filePart.getInputStream();
@@ -87,7 +84,10 @@ public class ServletEdition extends HttpServlet {
 			ph.setImg(bytes);
 		}
 		
-	    if(id.equals("") && !nom.equals("") && !description.equals("") && !groupe.equals("") && !prix.equals("") && !inputStream.equals("")){
+	    if(filePart.getSize()>100000){
+	    	request.setAttribute("error",1);
+			doGet(request,response);
+	    }else if(id.equals("") && !nom.equals("") && !description.equals("") && !groupe.equals("") && !prix.equals("") && !inputStream.equals("")){
 	    	p = new Plat();
 			p.setNom(nom);
 			p.setDescription(description);

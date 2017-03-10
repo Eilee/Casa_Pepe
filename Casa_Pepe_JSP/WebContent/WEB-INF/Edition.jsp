@@ -21,6 +21,11 @@
 		  <p><strong>Erreur</strong> L'un des champs n'a pas été correctement remplie.</p>
 		</div>
 	</c:if>
+	<c:if test="${error==1}">
+		<div class="col-md-4 col-md-offset-4 alert alert-danger" style="text-align:center;">
+		  <p><strong>Erreur</strong> L'image que vous avez sélectionné est trop lourde.</p>
+		</div>
+	</c:if>
 </div>
 <div class="row">
 	<div class="col-md-12 tableEdition">
@@ -63,7 +68,9 @@
 			    </c:if>
 				<tr>
 					<td>Photo du plat</td>
-					<td><input type="file" name="image"/><p style="text-align:center;">(tailleMax = 100Ko)</p></td>
+					<td>
+						<input type="file" name="image"/><p style="text-align:center;">(tailleMax = 100Ko)</p>
+					</td>
 				</tr>
 			</table>
 			<input name="id" value="${plat.getId()}" type="hidden"/>

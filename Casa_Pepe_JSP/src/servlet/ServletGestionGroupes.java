@@ -9,10 +9,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.itextpdf.text.DocumentException;
-
 import bean.Groupe;
-import bean.PdfCreator;
 import manager.Manager;
 
 @WebServlet("/GestionGroupes")

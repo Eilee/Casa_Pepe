@@ -4,7 +4,7 @@
 					<ul>
 						<div style="float:right;">
 							<br/>
-							Développé par Quentin Valette et Fabien Odic.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+							Développé par Quentin Vallette et Fabien Odic.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 							<br/>
 							<br/>
 						</div>
