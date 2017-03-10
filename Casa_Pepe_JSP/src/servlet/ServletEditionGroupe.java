@@ -46,6 +46,7 @@ public class ServletEditionGroupe extends HttpServlet {
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 * En fonction des valeurs récupérées cette fonction va éxecuter la création ou modification d'un groupe
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		System.out.println("doPost Edition");
@@ -55,16 +56,20 @@ public class ServletEditionGroupe extends HttpServlet {
 		Groupe grp = null;
 		String id = request.getParameter("id");
 		String nom = request.getParameter("nom");
-	    if(id.length()<1 && nom!=null){
+	    if(id.equals("") && !nom.equals("")){
 	    	grp = new Groupe();
 			grp.setNom(nom);
 			manager.createGroupe(grp);
-	    }else if(nom!=null){
+			response.sendRedirect("GestionGroupes");
+	    }else if(!id.equals("") && !nom.equals("")){
 	    	grp = new Groupe();
 	    	grp.setId(Integer.parseInt(id));
 			grp.setNom(nom);
 			manager.updateGroupe(grp);
+			response.sendRedirect("GestionGroupes");
+		}else{
+			request.setAttribute("error",2);
+			doGet(request,response);
 		}
-		response.sendRedirect("GestionGroupes");
 	}
 }

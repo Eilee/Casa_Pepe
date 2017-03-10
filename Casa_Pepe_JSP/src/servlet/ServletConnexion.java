@@ -38,6 +38,7 @@ Manager manager = (Manager) request.getSession().getAttribute("Manager");
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 * En fonction des valeurs récupérées cette fonction va éxecuter connexion ou non d'un utilisateur
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String ident = request.getParameter("ident");
@@ -46,8 +47,6 @@ Manager manager = (Manager) request.getSession().getAttribute("Manager");
 		if(manager.isIdentificationValid(ident, mdp)){
 			System.out.println("Identification OK");
 			response.sendRedirect("Accueil");
-			//passage de la session dans la request
-			//request.setAttribute("session", request.getSession());
 		}else{
 			System.out.println("Identification KO");
 			request.setAttribute("ident", ident);

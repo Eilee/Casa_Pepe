@@ -19,7 +19,8 @@ public class ServeurImpl implements ServeurInterface{
 	public String test()throws RemoteException{
 		return "test";
 	}
-	//Ouverture et fermeture de la BDD
+	
+	//Ouverture de la BDD
 	public boolean ouvrirBdd(){
 		if(base.ouvrir()){
 			System.out.println("Bdd ouverte - OK !");
@@ -29,16 +30,15 @@ public class ServeurImpl implements ServeurInterface{
 		return false;
 		
 	}
+	
+	//Fermeture de la BDD
 	public void fermerBdd(){
 		base.fermer();
 	}
 
-	// Test si existant
 	public boolean identificationValid(String id,String mdp) throws RemoteException{
 		return base.identIsValid(id, mdp);
 	}
-
-	//Accesseur
 	public ArrayList<Menu> getAllMenu() throws RemoteException{
 		return base.getAllMenu();
 	}
@@ -63,11 +63,9 @@ public class ServeurImpl implements ServeurInterface{
 	public Groupe getGroupe(int idGroupe) throws RemoteException{
 		return base.getGroupe(idGroupe);
 	}
-
 	public Photo getPhoto(int idPhoto) throws RemoteException{
 		return base.getPhoto(idPhoto);
 	}
-	//Gestion des entitées
 	public boolean createPlat(Plat p,Photo ph) throws RemoteException{
 		boolean res =  base.createPlat(p,ph);
 		return res;

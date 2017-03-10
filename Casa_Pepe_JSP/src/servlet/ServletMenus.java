@@ -45,15 +45,5 @@ public class ServletMenus extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		Manager manager = (Manager) request.getSession().getAttribute("Manager");
-		/*if(manager.recupereAllPlatsServ()){
-			System.out.println("Récup OK");
-			response.sendRedirect("Menus.jsp");
-			//passage de la session dans la request
-			//request.setAttribute(request.getSession(), arg1);
-		}else{
-			System.out.println("Menus KO");
-			doGet(request,response);
-		}*/
 	}
 }

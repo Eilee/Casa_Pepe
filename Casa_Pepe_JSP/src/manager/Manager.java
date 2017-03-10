@@ -28,15 +28,14 @@ public class Manager {
 		
 		try {
 			serveur = (ServeurInterface)registry.lookup("monServeurRmi");
-			System.out.println();
-			
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			System.out.println("Erreur lookup "+e.getMessage());
 		}
 	}
 	
-	public boolean getIsConnect(){return isConnect;}
+	public boolean getIsConnect(){
+		return isConnect;
+	}
 	public void setIsConnect(boolean b){
 		isConnect = b;
 	}
@@ -58,7 +57,6 @@ public class Manager {
 			res = serveur.getAllMenu();
 			return res;
 		} catch (RemoteException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return res;
@@ -69,7 +67,6 @@ public class Manager {
 			res = serveur.getMenu(idMenu);
 			return res;
 		} catch (RemoteException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return res;
@@ -80,7 +77,6 @@ public class Manager {
 			res = serveur.getMenuPlat(numMenu);
 			return res;
 		} catch (RemoteException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return res;
@@ -91,7 +87,6 @@ public class Manager {
 			res = serveur.getAllPlat();
 			return res;
 		} catch (RemoteException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return res;
@@ -102,7 +97,6 @@ public class Manager {
 			res = serveur.getPlat(idPlat);
 			return res;
 		} catch (RemoteException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return res;
@@ -113,7 +107,6 @@ public class Manager {
 			res = serveur.getAllGroupe();
 			return res;
 		} catch (RemoteException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return res;
@@ -136,7 +129,6 @@ public class Manager {
 			serveur.deletePlat(p);
 			return res = true;
 		} catch (RemoteException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return res;

@@ -29,17 +29,21 @@ public class ServletPdf extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		System.out.println("doGet PDF");
+		int idGroupe = -1;
 		String filename = request.getServletContext().getRealPath("")+"/pdfFile.pdf";
 		Manager manager = (Manager) request.getSession().getAttribute("Manager");
 		
 		if(manager==null){
 			response.sendRedirect("Accueil");
 		}else{
+			//Création du fichier pdf
 			PdfCreator pdfFile = new PdfCreator();
-			int idGroupe = Integer.parseInt(request.getParameter("idGroupe"));
-			ArrayList<Plat> list = manager.getPlatsDuGroupe(idGroupe);
-			pdfFile.createPdf(filename,list);
-			request.getServletContext().getRequestDispatcher("/WEB-INF/PdfFile.jsp").forward(request, response);
+			idGroupe = Integer.parseInt(request.getParameter("idGroupe"));
+			if(idGroupe>=0){
+				ArrayList<Plat> list = manager.getPlatsDuGroupe(idGroupe);
+				pdfFile.createPdf(filename,list);
+				request.getServletContext().getRequestDispatcher("/WEB-INF/PdfFile.jsp").forward(request, response);
+			}
 		}
 	}
 

@@ -55,6 +55,7 @@ public class ServletEdition extends HttpServlet {
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 * En fonction des valeurs récupérées cette fonction va éxecuter la création ou modification d'un plat avec sa photo
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		System.out.println("doPost Edition");

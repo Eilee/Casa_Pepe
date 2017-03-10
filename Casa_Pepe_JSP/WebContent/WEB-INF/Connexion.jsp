@@ -24,9 +24,9 @@
 	</c:if>
 </div>
 <div class="row">
-	<div class="col-md-12">
+	<div class="col-md-12 tableConnexion">
 		<form method="post" action="Connexion">
-			<table>
+			<table align="center">
 				<tr>
 					<td>Identifiant : </td> <td><input name ="ident" type="text" value=""/></td>
 				</tr>

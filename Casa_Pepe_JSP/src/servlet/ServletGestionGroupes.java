@@ -44,6 +44,7 @@ public class ServletGestionGroupes extends HttpServlet {
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 * En fonction des valeurs récupérées cette fonction va éxecuter la création, modification, suppression ou l'affichage d'un groupe
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		System.out.println("doPost Gestion Plats");

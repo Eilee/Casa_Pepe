@@ -42,7 +42,7 @@
 						</form>
 		            </td>
 					<td>
-						<form method="post" onsubmit="return confirm('Voulez-vous vraiment supprimer ce plats ?');">
+						<form method="post" onsubmit="return confirm('Voulez-vous vraiment supprimer ce plats ?\n\n(ATTENTION : tous les plats fesant parti de ce groupe seront également supprimer !)');">
 							<input name="delete" value="${listGroupe.getId()}" type="hidden"/>
 							<input type="image" src="img/supprimer.png" border="0" alt="Submit"/>
 						</form>
