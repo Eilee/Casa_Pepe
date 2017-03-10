@@ -63,7 +63,6 @@ public class ServeurImpl implements ServeurInterface{
 	public Groupe getGroupe(int idGroupe) throws RemoteException{
 		return base.getGroupe(idGroupe);
 	}
-
 	public Photo getPhoto(int idPhoto) throws RemoteException{
 		return base.getPhoto(idPhoto);
 	}
